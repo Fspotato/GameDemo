@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEngine;
-using Unity.VisualScripting;
 
 public class MapUI : MonoBehaviour
 {
@@ -15,7 +14,7 @@ public class MapUI : MonoBehaviour
 
     public GameObject mapLinePrefab;
 
-    public Material materiaiPrefab;
+    public Material materialPrefab;
 
     public GameObject mapParent;
 
@@ -31,13 +30,7 @@ public class MapUI : MonoBehaviour
 
     void Update()
     {
-        foreach (var line in mapLines)
-        {
-            var image = line.obj.GetComponent<Image>();
-            var material = image.GetModifiedMaterial(image.material);
-            material.SetVector("_LP1", new Vector4(RectTransformUtility.WorldToScreenPoint(null, line.from.transform.position).x, 1080f - RectTransformUtility.WorldToScreenPoint(null, line.from.transform.position).y, 0f, 0f));
-            material.SetVector("_LP2", new Vector4(RectTransformUtility.WorldToScreenPoint(null, line.to.transform.position).x, 1080f - RectTransformUtility.WorldToScreenPoint(null, line.to.transform.position).y, 0f, 0f));
-        }
+        ReCalculateLineShader();
     }
 
     public void ShowMap(Map m)
@@ -70,7 +63,7 @@ public class MapUI : MonoBehaviour
         }
 
         GameObject lineObj = Instantiate(mapLinePrefab, mapParent.transform);
-        Material lm = lineObj.GetComponent<Image>().material = Instantiate(materiaiPrefab);
+        Material lm = lineObj.GetComponent<Image>().material = Instantiate(materialPrefab);
 
         Vector2 fromPoint = from.GetComponent<RectTransform>().anchoredPosition;
         Vector2 toPoint = to.GetComponent<RectTransform>().anchoredPosition;
@@ -78,12 +71,24 @@ public class MapUI : MonoBehaviour
         lineObj.GetComponent<RectTransform>().anchoredPosition = (fromPoint + toPoint) / 2f;
         lineObj.GetComponent<RectTransform>().sizeDelta = new Vector2(Mathf.Abs(fromPoint.x - toPoint.x) + 30f, Mathf.Abs(fromPoint.y - toPoint.y) + 30f);
 
-        lm.SetVector("_LP1", new Vector4(RectTransformUtility.WorldToScreenPoint(null, from.transform.position).x, 1080f - RectTransformUtility.WorldToScreenPoint(null, from.transform.position).y, 0f, 0f));
-        lm.SetVector("_LP2", new Vector4(RectTransformUtility.WorldToScreenPoint(null, to.transform.position).x, 1080f - RectTransformUtility.WorldToScreenPoint(null, to.transform.position).y, 0f, 0f));
-        lm.SetFloat("_LineWidth", 10f);
-
         lineObj.transform.SetAsFirstSibling();
         mapLines.Add(new MapLine(lineObj, from, to));
+
+        lm.SetFloat("_LineWidth", 10f);
+    }
+
+    private void ReCalculateLineShader()
+    {
+        foreach (var line in mapLines)
+        {
+            var image = line.obj.GetComponent<Image>();
+            var material = image.GetModifiedMaterial(image.material);
+            material.SetVector("_LP1", new Vector4(RectTransformUtility.WorldToScreenPoint(null, line.from.transform.position).x, 1080f - RectTransformUtility.WorldToScreenPoint(null, line.from.transform.position).y, 0f, 0f));
+            material.SetVector("_LP2", new Vector4(RectTransformUtility.WorldToScreenPoint(null, line.to.transform.position).x, 1080f - RectTransformUtility.WorldToScreenPoint(null, line.to.transform.position).y, 0f, 0f));
+            if (line.from.nodeStates == NodeStates.Visited && line.to.nodeStates == NodeStates.Attainable) material.SetColor("_Color", Color.gray);
+            else if (line.from.nodeStates == NodeStates.Visited && line.to.nodeStates == NodeStates.Visited) material.SetColor("_Color", Color.white);
+            else material.SetColor("_Color", Color.black);
+        }
     }
 
     private void AddLineConnection(MapNode from, MapNode to)
@@ -126,6 +131,7 @@ public class MapUI : MonoBehaviour
     {
         mapParent = new GameObject("MapContent");
         mapParent.transform.SetParent(content.transform);
+        content.transform.localPosition = Vector2.zero;
         mapParent.AddComponent<RectTransform>().anchoredPosition = Vector2.zero;
     }
 

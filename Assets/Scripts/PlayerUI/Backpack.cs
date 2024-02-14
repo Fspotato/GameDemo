@@ -58,6 +58,7 @@ public class Backpack : BaseManager<Backpack>
             BackpackItem bItem = itemObj.GetComponent<BackpackItem>();
             bItem.ID = e.ID;
             bItem.ItemName.text = e.StrValue[EntityKey.Name];
+            bItem.ItemCount.text = e.Amount.ToString();
 
             itemObjs.Add(itemObj);
         }

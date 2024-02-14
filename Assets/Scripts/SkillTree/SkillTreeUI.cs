@@ -12,11 +12,19 @@ public class SkillTreeUI : BaseManager<SkillTreeUI>
     [SerializeField] GameObject skillBox;
     [SerializeField] GameObject content;
     [SerializeField] GameObject skillNodePrefab;
+    [SerializeField] GameObject linePrefab;
+    [SerializeField] Material lineMaterialPrefab;
 
     public List<SkillNode> skillNodes = new List<SkillNode>();
+    public List<SkillLine> skillLines = new List<SkillLine>();
 
     SkillNode selected;
     GameObject nodeParent;
+
+    void Update()
+    {
+        ReCalculateLineShader();
+    }
 
     #region 顯示技能樹及面板相關
 
@@ -28,6 +36,8 @@ public class SkillTreeUI : BaseManager<SkillTreeUI>
         CreateParent();
 
         CreateSkillNodes(tree.skills);
+
+        DrawLines();
 
         SetNodeStates();
 
@@ -43,6 +53,7 @@ public class SkillTreeUI : BaseManager<SkillTreeUI>
     {
         if (nodeParent != null) Destroy(nodeParent);
         selected = null;
+        skillLines.Clear();
         skillNodes.Clear();
     }
 
@@ -75,9 +86,46 @@ public class SkillTreeUI : BaseManager<SkillTreeUI>
                 AddLines(GetNode(front), node);
     }
 
+    // 繪製連線
     void AddLines(SkillNode from, SkillNode to)
     {
+        if (from == null || to == null) return;
 
+        if (to.skill.position.x < from.skill.position.x)
+        {
+            var temp = from;
+            from = to;
+            to = temp;
+        }
+
+        GameObject line = Instantiate(linePrefab, nodeParent.transform);
+        Material lm = line.GetComponent<Image>().material = Instantiate(lineMaterialPrefab);
+
+        Vector2 fromPoint = from.GetComponent<RectTransform>().anchoredPosition;
+        Vector2 toPoint = to.GetComponent<RectTransform>().anchoredPosition;
+
+        line.GetComponent<RectTransform>().anchoredPosition = (fromPoint + toPoint) / 2f;
+        line.GetComponent<RectTransform>().sizeDelta = new Vector2(Mathf.Abs(fromPoint.x - toPoint.x) + 30f, Mathf.Abs(fromPoint.y - toPoint.y) + 30f);
+
+        line.transform.SetAsFirstSibling();
+        skillLines.Add(new SkillLine(from, to, line));
+
+        lm.SetFloat("_LineWidth", 10f);
+    }
+
+    // 重新計算連線的Shader參數
+    void ReCalculateLineShader()
+    {
+        foreach (var line in skillLines)
+        {
+            var image = line.obj.GetComponent<Image>();
+            var material = image.GetModifiedMaterial(image.material);
+            material.SetVector("_LP1", new Vector4(RectTransformUtility.WorldToScreenPoint(null, line.from.transform.position).x, 1080f - RectTransformUtility.WorldToScreenPoint(null, line.from.transform.position).y, 0f, 0f));
+            material.SetVector("_LP2", new Vector4(RectTransformUtility.WorldToScreenPoint(null, line.to.transform.position).x, 1080f - RectTransformUtility.WorldToScreenPoint(null, line.to.transform.position).y, 0f, 0f));
+            if (line.to.skill.unLocked == true) material.SetColor("_Color", Color.white);
+            if (line.to.skill.unLocked == false) material.SetColor("_Color", Color.gray);
+            if (line.from.skill.unLocked == false) material.SetColor("_Color", new Color(0f, 0f, 0f, 0f));
+        }
     }
 
     // 改變技能節點狀態
@@ -161,10 +209,10 @@ public class SkillTreeUI : BaseManager<SkillTreeUI>
         }
     }
 
-
+    // 根據點位獲取 SkillNode
     SkillNode GetNode(Point point)
     {
-        return skillNodes.FirstOrDefault(n => n.skill.point == point);
+        return skillNodes.FirstOrDefault(n => n.skill.point.Equals(point));
     }
 
     #endregion
@@ -201,5 +249,19 @@ public class SkillTreeUI : BaseManager<SkillTreeUI>
         skillPointText.text = $"Skill Point:{skillManager.skillTree.SkillPoint}";
         ShowSkillBox(selected.skill);
         SetNodeStates();
+    }
+}
+
+public class SkillLine
+{
+    public SkillNode from;
+    public SkillNode to;
+    public GameObject obj;
+
+    public SkillLine(SkillNode from, SkillNode to, GameObject obj)
+    {
+        this.from = from;
+        this.to = to;
+        this.obj = obj;
     }
 }

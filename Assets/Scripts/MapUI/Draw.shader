@@ -50,6 +50,7 @@ Shader "Custom/Draw"
 
             float4 _LP1;
             float4 _LP2;
+            float4 _Color;
             float _LineWidth;
 
             v2f vert(appdata v)
@@ -75,7 +76,7 @@ Shader "Custom/Draw"
 
                 if(d <= _LineWidth / 2)
                 {
-                    return fixed4(1,1,1,1);
+                    return _Color;
                 }
 
                 return fixed4(0,0,0,0);
