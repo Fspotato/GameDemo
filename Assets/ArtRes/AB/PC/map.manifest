@@ -1,0 +1,103 @@
+ManifestFileVersion: 0
+CRC: 2444636758
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 93dd41c29dac124dc8afe460d71d4243
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 1d5574bdff55f42fd28efc90462da542
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9e2c2cf63086f644fab8618c2cbb6352, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 857c65052cec0124e94ae509b1ab5061, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: bbdc98015d504b54fa8112392940395e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: bd218c5287caecf4d89d7dfad74c47ac, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9dd32a84a9a36fc488422bdfdddd781d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0d29f1c99b9b1f14a839f6fa0604ce46, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 120
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: FloatMinMax
+- AssemblyName: Assembly-CSharp
+  ClassName: IntMinMax
+- AssemblyName: Assembly-CSharp
+  ClassName: Map
+- AssemblyName: Assembly-CSharp
+  ClassName: MapLayer
+- AssemblyName: Assembly-CSharp
+  ClassName: Node
+- AssemblyName: Assembly-CSharp
+  ClassName: NodeType
+- AssemblyName: Assembly-CSharp
+  ClassName: Point
+- AssemblyName: Assembly-CSharp
+  ClassName: SerializableList`1[Node]
+- AssemblyName: Assembly-CSharp
+  ClassName: SerializableList`1[Point]
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.ArgumentCache
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentListenerMode
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.AnimationTriggers
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Button/ButtonClickedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ColorBlock
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.FontData
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Navigation
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ScrollRect/ScrollRectEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Scrollbar/ScrollEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.SpriteState
+Assets:
+- Assets/Prefabs/Map/Map.prefab
+- Assets/Prefabs/Map/Node.prefab
+- Assets/Prefabs/Map/Line.prefab
+Dependencies: []

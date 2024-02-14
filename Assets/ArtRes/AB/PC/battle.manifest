@@ -1,0 +1,108 @@
+ManifestFileVersion: 0
+CRC: 3716732040
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: ad81ba39f3d72189a2e0c485079d3b1c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: d25f196e0bb2da164ab420812aa8d92e
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 446cec9b56b39614f8bb224725e557f6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 927dc8c817cfc774fae7371fc7b1a9c2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9d7c9f74f94c46e46af9f52f2ad2d44e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 427b7a786546aaa40a77054307e2bbed, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1c0661cc0ea2c7c4d8099cc52c8aa82c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 53489a97dd344ee44b997ebbc7fa08b6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 774f051dec80fb84c9cb0ff993de8595, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: bbe03849b70ab024787ee472f6f85de8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 362ee9f2b37400f45bb292f6d080f9ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9e3fab48e7e71314e8c4e9be9657f541, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ba2d0117aae3cd541b177375aad91d18, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2e635a68a4e2ff14c8557ffa7bb4ee49, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: BuffManager
+- AssemblyName: Assembly-CSharp
+  ClassName: SerializableList`1[UnityEngine.GameObject]
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.AnimationTriggers
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ColorBlock
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.FontData
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Navigation
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Slider/SliderEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.SpriteState
+Assets:
+- Assets/Prefabs/BattleUI/EnemyInfo.prefab
+- Assets/Prefabs/BattleUI/ElementalBalls/WhiteBall.prefab
+- Assets/Prefabs/Battle/Enemies/Slime_Orange.prefab
+- Assets/Prefabs/BattleUI/ElementalBalls/BlueBall.prefab
+- Assets/Prefabs/Battle/Enemies/GoblinRider.prefab
+- Assets/Prefabs/Battle/Enemies/Goblin.prefab
+- Assets/Prefabs/Battle/Enemies/GoblinArcher.prefab
+- Assets/Prefabs/Battle/Enemies/Slime.prefab
+- Assets/Prefabs/BattleUI/BattleUI.prefab
+- Assets/Prefabs/Battle/BattleManager.prefab
+- Assets/Prefabs/BattleUI/ElementalBalls/RainbowBall.prefab
+- Assets/Prefabs/BattleUI/ElementalBalls/YellowBall.prefab
+- Assets/Prefabs/BattleUI/ElementalBalls/RedBall.prefab
+- Assets/Prefabs/Battle/Enemies/SlimeKing.prefab
+- Assets/Prefabs/Battle/Player.prefab
+- Assets/Prefabs/Battle/Aim.prefab
+Dependencies: []

@@ -1,0 +1,90 @@
+ManifestFileVersion: 0
+CRC: 3410718188
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 67f2ea61a484f9d516f1e5a658e3ac11
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: efa2c0dc4d6c963bc990e629793e0d00
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2677036c653ec2e49824038dfc7b30de, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8dae9b45d69762c4a90f49c056749156, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e638460ca2e16cb47816b00fe4b9ec6b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e6b509c1e94901c4c8720a42bc15ab43, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 241f562b812b40a44b26fd43efa80619, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c98544b59d19ee148bc328e53f10ada0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a52a3aed68cbe07498f712a4eba9ebb0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 037236991b9e5024ab1fc656278e7aa2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e8392332cc385fa4aa6aa1378d4469f6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2f7d995689d7fff499487a97725be290, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0ef236f31ddd37743abb80e699fdf97b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fb76af4a5c62b7249a167c03243d6d99, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: SerializableList`1[Event]
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.AnimationTriggers
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ColorBlock
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.FontData
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Navigation
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ScrollRect/ScrollRectEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Scrollbar/ScrollEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.SpriteState
+Assets:
+- Assets/Prefabs/PlayerUI/Backpack.prefab
+- Assets/Prefabs/PlayerUI/BackpackItem.prefab
+- Assets/Prefabs/PlayerUI/PlayerUI.prefab
+- Assets/Prefabs/Event/EventWindow.prefab
+Dependencies: []

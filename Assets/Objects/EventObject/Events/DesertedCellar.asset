@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b509c1e94901c4c8720a42bc15ab43, type: 3}
+  m_Name: DesertedCellar
+  m_EditorClassIdentifier: 
+  imgae: {fileID: 0}
+  type: 0
+  eventName: "\u5EE2\u68C4\u5730\u7A96"
+  description: "\u6563\u767C\u8457\u5947\u602A\u6C23\u5473\u7684\u5730\u7A96\uFF0C\u4E00\u822C\u4EBA\u4E0D\u6703\u60F3\u9760\u8FD1\u3002"
+  selections:
+  - "\u9032\u5165\u5730\u7A96"
+  - "\u96E2\u958B"

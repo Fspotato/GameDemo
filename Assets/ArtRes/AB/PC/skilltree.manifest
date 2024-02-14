@@ -1,0 +1,84 @@
+ManifestFileVersion: 0
+CRC: 630075991
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2c0a9cbf51722e5775c90b53ebac7368
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 3bd71dc30704cc60d185a57d0eb9cb73
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 220ee22c4c3a1f643bdc115736445e8e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f976ec2736ca7d04cb33f80d68295ba7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ff5fe9697f0140243b2d11e3846784ac, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1da04312cc2fc434fb21046424ec4d45, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 07c679ffd69eba144834510c3fdfa45a, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: Point
+- AssemblyName: Assembly-CSharp
+  ClassName: SerializableDictionary`2[System.String,Skill]
+- AssemblyName: Assembly-CSharp
+  ClassName: SerializableList`1[Point]
+- AssemblyName: Assembly-CSharp
+  ClassName: SerializableList`1[Skill]
+- AssemblyName: Assembly-CSharp
+  ClassName: Skill
+- AssemblyName: Assembly-CSharp
+  ClassName: SkillTree
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.AnimationTriggers
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ColorBlock
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.FontData
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Navigation
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ScrollRect/ScrollRectEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Scrollbar/ScrollEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.SpriteState
+Assets:
+- Assets/Prefabs/SkillTree/SkillNode.prefab
+- Assets/Prefabs/SkillTree/SkillTree.prefab
+Dependencies: []

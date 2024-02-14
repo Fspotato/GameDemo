@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f976ec2736ca7d04cb33f80d68295ba7, type: 3}
+  m_Name: SwordManSkillTree
+  m_EditorClassIdentifier: 
+  skills:
+    list:
+    - name: "\u5288\u780D"
+      description: "\u5C0D\u55AE\u9AD4\u6575\u4EBA\u9020\u62104\u9EDE\u50B7\u5BB3\u3002"
+      arrange: R00
+      point:
+        x: 0
+        y: 0
+      frontSkills:
+        list: []
+      position: {x: 0, y: 2}
+      require: 1
+      unLocked: 0
+      isEquiped: 0
+    - name: "\u5B88\u8B77"
+      description: "\u53D7\u5230\u50B7\u5BB3\u964D\u4F4E+2\uFF0C\u6301\u7E8C2\u56DE\u5408\u3002"
+      arrange: B00
+      point:
+        x: 1
+        y: 0
+      frontSkills:
+        list: []
+      position: {x: 1.5, y: 0}
+      require: 1
+      unLocked: 0
+      isEquiped: 0
+    - name: "\u9B25\u6C23"
+      description: "\u7372\u5F971\u9EDE\u9B25\u6C23\u3002"
+      arrange: Y00
+      point:
+        x: 2
+        y: 0
+      frontSkills:
+        list: []
+      position: {x: -1.5, y: 0}
+      require: 1
+      unLocked: 0
+      isEquiped: 0
+    - name: "\u5F37\u653B"
+      description: "\u5C0D\u55AE\u9AD4\u6575\u4EBA\u9020\u62108\u9EDE\u50B7\u5BB3\u3002"
+      arrange: R00
+      point:
+        x: 0
+        y: 1
+      frontSkills:
+        list:
+        - x: 0
+          y: 0
+      position: {x: 0, y: 4}
+      require: 2
+      unLocked: 0
+      isEquiped: 0
+    - name: "\u706B\u7130\u5200"
+      description: "\u5C0D\u55AE\u9AD4\u6575\u4EBA\u9020\u62105\u9EDE\u50B7\u5BB3\uFF0C\u9020\u6210\u4E00\u5C64\u71C3\u71D2\u3002"
+      arrange: R00
+      point:
+        x: 0
+        y: 2
+      frontSkills:
+        list:
+        - x: 0
+          y: 1
+      position: {x: 0, y: 6}
+      require: 3
+      unLocked: 0
+      isEquiped: 0
