@@ -220,7 +220,7 @@ public class SkillTreeUI : BaseManager<SkillTreeUI>
     // 獲取技能節點
     public SkillNode GetSelectedNode()
     {
-        return skillNodes.FirstOrDefault(n => n.transform.Find("Selected").gameObject.activeSelf == true);
+        return skillNodes.FirstOrDefault(n => n.selected.activeSelf == true);
     }
 
     // 選擇技能節點
@@ -228,8 +228,8 @@ public class SkillTreeUI : BaseManager<SkillTreeUI>
     {
         if (node.state == SkillNodeState.Hidden) return;
         if (GetSelectedNode() != null)
-            GetSelectedNode().transform.Find("Selected").gameObject.SetActive(false);
-        node.transform.Find("Selected").gameObject.SetActive(true);
+            GetSelectedNode().selected.SetActive(false);
+        node.selected.SetActive(true);
         ShowSkillBox(node.skill);
         selected = node;
     }
@@ -240,6 +240,7 @@ public class SkillTreeUI : BaseManager<SkillTreeUI>
         SkillManager.Instance.EquipSkill(selected.skill);
         ShowSkillBox(selected.skill);
         ShowEquipedSkill();
+        SetNodeStates();
     }
 
     // 解鎖技能

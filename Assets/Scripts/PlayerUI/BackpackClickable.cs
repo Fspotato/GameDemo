@@ -15,7 +15,7 @@ public class BackpackClickable : MonoBehaviour, IPointerClickHandler
         switch (type)
         {
             case BackpackClickType.View:
-                Backpack.Instance.ShowItem(transform.GetComponent<BackpackItem>().ID);
+                Backpack.Instance.ShowItem(transform.GetComponent<BackpackItem>());
                 break;
             case BackpackClickType.Exit:
                 Backpack.Instance.Exit();

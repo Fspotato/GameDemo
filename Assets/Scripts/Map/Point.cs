@@ -1,10 +1,11 @@
 using System;
+using UnityEngine;
+using UnityEditor;
 
 [Serializable]
 public class Point : IEquatable<Point>
 {
-    public int x;
-    public int y;
+    [SerializeField] public int x, y;
 
     public Point(int x, int y)
     {

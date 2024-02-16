@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class SkillNode : MonoBehaviour, IPointerClickHandler
 {
     public Image image;
+    public GameObject selected;
+    public GameObject equiped;
     public Skill skill;
     public SkillNodeState state;
 
@@ -18,6 +20,10 @@ public class SkillNode : MonoBehaviour, IPointerClickHandler
     public void SetState(SkillNodeState state)
     {
         this.state = state;
+
+        if (skill.isEquiped) equiped.SetActive(true);
+        else equiped.SetActive(false);
+
         switch (state)
         {
             case SkillNodeState.UnLocked:

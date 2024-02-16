@@ -6,7 +6,7 @@ public class SwordsMan : Player
 {
     #region 技能組
 
-    protected override void SkillR00(string skillName, Enemy enemy, GameObject[] enemies)
+    protected override void SkillR00(string skillName, Enemy enemy, List<GameObject> enemies)
     {
         switch (skillName)
         {
@@ -20,10 +20,17 @@ public class SwordsMan : Player
                 enemy.TakeDamage(5);
                 enemy.Buffs.GetBuff(BuffType.Ignite, 50001, 5, 1, 3, 1);
                 break;
+            case "寂滅":
+                foreach (var enemyObj in enemies)
+                {
+                    if (enemyObj == null || enemyObj.activeSelf == false) continue;
+                    enemyObj.GetComponent<Enemy>().TakeDamage(100);
+                }
+                break;
         }
     }
 
-    protected override void SkillB00(string skillName, Enemy enemy, GameObject[] enemies)
+    protected override void SkillB00(string skillName, Enemy enemy, List<GameObject> enemies)
     {
         switch (skillName)
         {
@@ -33,7 +40,7 @@ public class SwordsMan : Player
         }
     }
 
-    protected override void SkillY00(string skillName, Enemy enemy, GameObject[] enemies)
+    protected override void SkillY00(string skillName, Enemy enemy, List<GameObject> enemies)
     {
         switch (skillName)
         {

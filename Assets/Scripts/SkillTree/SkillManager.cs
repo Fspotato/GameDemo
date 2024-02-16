@@ -28,6 +28,7 @@ public class SkillManager : BaseManager<SkillManager>
         {
             string json = File.ReadAllText(Application.persistentDataPath + "/skilltree.json");
             skillTree = JsonUtility.FromJson<SkillTree>(json);
+            skillTree.ReLinkEquipedSkills();
         }
         else
         {
@@ -82,8 +83,9 @@ public class SkillManager : BaseManager<SkillManager>
             {
                 if (skillTree.equipedSkills[skill.arrange] != default)
                     skillTree.equipedSkills[skill.arrange].isEquiped = false;
-                skillTree.equipedSkills[skill.arrange] = skill;
+
                 skill.isEquiped = true;
+                skillTree.equipedSkills[skill.arrange] = skill;
             }
         }
         else

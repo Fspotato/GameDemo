@@ -78,3 +78,17 @@ MonoBehaviour:
       require: 3
       unLocked: 0
       isEquiped: 0
+    - name: "\u5BC2\u6EC5"
+      description: "\u6E2C\u8A66\u7528\u6280\u80FD"
+      arrange: R00
+      point:
+        x: 0
+        y: 3
+      frontSkills:
+        list:
+        - x: 0
+          y: 2
+      position: {x: 0, y: 10}
+      require: 1
+      unLocked: 0
+      isEquiped: 0

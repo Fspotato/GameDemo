@@ -39,7 +39,7 @@ public class Player : BattleObject
     #region 技能組
 
     // 供外部調用
-    public virtual void UseSkill(string arrange, Enemy enemy, GameObject[] enemies)
+    public virtual void UseSkill(string arrange, Enemy enemy, List<GameObject> enemies)
     {
 
         string skillName = SkillManager.Instance.GetSkillName(arrange);
@@ -55,9 +55,9 @@ public class Player : BattleObject
     }
 
     // 寫在子類角色腳本中
-    protected virtual void SkillR00(string skillName, Enemy enemy, GameObject[] enemies) { }
-    protected virtual void SkillB00(string skillName, Enemy enemy, GameObject[] enemies) { }
-    protected virtual void SkillY00(string skillName, Enemy enemy, GameObject[] enemies) { }
+    protected virtual void SkillR00(string skillName, Enemy enemy, List<GameObject> enemies) { }
+    protected virtual void SkillB00(string skillName, Enemy enemy, List<GameObject> enemies) { }
+    protected virtual void SkillY00(string skillName, Enemy enemy, List<GameObject> enemies) { }
 
     #endregion
 

@@ -193,7 +193,13 @@ public class BattleManager : BaseManager<BattleManager>
     public void PlayerAttack(string arrange)
     {
         // 根據組合使用記錄下的攻擊
-        player.UseSkill(arrange, enemies[selectedIndex].GetComponent<Enemy>(), enemies);
+        List<GameObject> tempEnemies = new List<GameObject>();
+        foreach (var enemy in enemies)
+        {
+            if (enemy == null || enemy.activeSelf == false) continue;
+            tempEnemies.Add(enemy);
+        }
+        player.UseSkill(arrange, enemies[selectedIndex].GetComponent<Enemy>(), tempEnemies);
         StartCoroutine(Choose());
     }
 

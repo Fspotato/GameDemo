@@ -18,6 +18,16 @@ public class SkillTree
         this.skills = skills;
     }
 
+    // json反序列化後會解除引用關係 變成兩個獨立的對象 因此需要重新鏈結
+    public void ReLinkEquipedSkills()
+    {
+        equipedSkills.Clear();
+        foreach (var skill in skills)
+        {
+            if (skill.isEquiped) equipedSkills.Add(skill.arrange, skill);
+        }
+    }
+
     public void GetSkillPoint(int amount)
     {
         SkillPoint += amount;

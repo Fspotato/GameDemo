@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,8 +13,16 @@ public class Backpack : BaseManager<Backpack>
     [SerializeField] GameObject itemPrefab;
 
     GameObject itemParent;
+    BackpackItem currentItem;
+    int selectedIndex = -1;
+
 
     List<GameObject> itemObjs = new List<GameObject>();
+
+    void Update()
+    {
+        Select();
+    }
 
     // 展示背包
     public void ShowBackpack()
@@ -24,14 +33,30 @@ public class Backpack : BaseManager<Backpack>
 
         ShowItems();
 
+        if (selectedIndex == -1) selectedIndex = 0;
+
+        if (itemObjs.Count != 0) ShowItem();
+
         ShowMoney();
     }
 
     // 展示道具
-    public void ShowItem(uint id)
+    public void ShowItem(BackpackItem item)
     {
-        itemNameText.text = DataManager.Instance.GetEntityNameById(id);
-        itemDescriptionText.text = DataManager.Instance.GetEntityDescriptionByID(id);
+        if (currentItem != null) currentItem.selected.SetActive(false);
+
+        item.selected.SetActive(true);
+        itemNameText.text = DataManager.Instance.GetEntityNameById(item.ID);
+        itemDescriptionText.text = DataManager.Instance.GetEntityDescriptionByID(item.ID);
+
+        selectedIndex = itemObjs.IndexOf(itemObjs.FirstOrDefault(i => i.Equals(item.gameObject)));
+        currentItem = item;
+    }
+
+    // 展示道具 根據index重載
+    private void ShowItem()
+    {
+        ShowItem(itemObjs[selectedIndex].GetComponent<BackpackItem>());
     }
 
     // 展示金錢
@@ -79,6 +104,32 @@ public class Backpack : BaseManager<Backpack>
         parentRect.anchoredPosition = Vector2.zero;
 
         itemObjs.Clear();
+    }
+
+    // 選擇道具
+    private void Select()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            selectedIndex++;
+            if (selectedIndex >= itemObjs.Count) selectedIndex--;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            selectedIndex--;
+            if (selectedIndex < 0) selectedIndex++;
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            selectedIndex -= 5;
+            if (selectedIndex < 0) selectedIndex += 5;
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            selectedIndex += 5;
+            if (selectedIndex >= itemObjs.Count) selectedIndex -= 5;
+        }
+        ShowItem();
     }
 
     // 離開背包
