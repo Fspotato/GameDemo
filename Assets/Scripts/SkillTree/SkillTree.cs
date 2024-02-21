@@ -11,7 +11,7 @@ public class SkillTree
     public int SkillPoint;
 
     public SerializableList<Point> unLockedSkills = new SerializableList<Point>();
-    public SerializableDictionary<string, Skill> equipedSkills = new SerializableDictionary<string, Skill>();
+    public SerializableDictionary<SkillType, uint> equipedSkills = new SerializableDictionary<SkillType, uint>();
 
     public SkillTree(SerializableList<Skill> skills)
     {
@@ -21,11 +21,11 @@ public class SkillTree
     // json反序列化後會解除引用關係 變成兩個獨立的對象 因此需要重新鏈結
     public void ReLinkEquipedSkills()
     {
-        equipedSkills.Clear();
+        /*equipedSkills.Clear();
         foreach (var skill in skills)
         {
             if (skill.isEquiped) equipedSkills.Add(skill.arrange, skill);
-        }
+        }*/
     }
 
     public void GetSkillPoint(int amount)

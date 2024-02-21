@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1521087039
+CRC: 122624181
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -21,5 +21,5 @@ AssetBundleManifest:
       Name: shop
       Dependencies: {}
     Info_6:
-      Name: battle
+      Name: battlenew
       Dependencies: {}

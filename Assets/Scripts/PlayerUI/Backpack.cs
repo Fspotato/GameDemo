@@ -56,6 +56,7 @@ public class Backpack : BaseManager<Backpack>
     // 展示道具 根據index重載
     private void ShowItem()
     {
+        if (selectedIndex > itemObjs.Count - 1) return;
         ShowItem(itemObjs[selectedIndex].GetComponent<BackpackItem>());
     }
 
@@ -129,7 +130,7 @@ public class Backpack : BaseManager<Backpack>
             selectedIndex += 5;
             if (selectedIndex >= itemObjs.Count) selectedIndex -= 5;
         }
-        ShowItem();
+        if (selectedIndex <= itemObjs.Count - 1) ShowItem();
     }
 
     // 離開背包

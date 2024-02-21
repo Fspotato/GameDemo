@@ -23,7 +23,7 @@ public class MainManager : MonoBehaviour
         SetUIObject("playerui", "eventwindow");
         SetUIObject("playerui", "backpack");
         SetUIObject("shop", "shop");
-        SetObject("battle", "battlemanager");
+        SetObject("battlenew", "battlemanager");
         SetUIObject("skilltree", "skilltree");
     }
 

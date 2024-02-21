@@ -72,25 +72,25 @@ public class SkillManager : BaseManager<SkillManager>
     // 裝備技能
     public void EquipSkill(Skill skill)
     {
-        if (skillTree.equipedSkills.ContainsKey(skill.arrange))
+        if (skillTree.equipedSkills.ContainsKey(skill.type))
         {
-            if (skill.Equals(skillTree.equipedSkills[skill.arrange]))
+            if (skill.Equals(GetEquipedSkillByType(skill.type)))
             {
-                skillTree.equipedSkills[skill.arrange] = default;
+                skillTree.equipedSkills[skill.type] = default;
                 skill.isEquiped = false;
             }
             else
             {
-                if (skillTree.equipedSkills[skill.arrange] != default)
-                    skillTree.equipedSkills[skill.arrange].isEquiped = false;
+                if (skillTree.equipedSkills[skill.type] != default)
+                    skillTree.skills.FirstOrDefault(s => s.id == skillTree.equipedSkills[skill.type]).isEquiped = false;
 
                 skill.isEquiped = true;
-                skillTree.equipedSkills[skill.arrange] = skill;
+                skillTree.equipedSkills[skill.type] = skill.id;
             }
         }
         else
         {
-            skillTree.equipedSkills.Add(skill.arrange, skill);
+            skillTree.equipedSkills.Add(skill.type, skill.id);
             skill.isEquiped = true;
         }
         SaveSkillTree();
@@ -108,7 +108,7 @@ public class SkillManager : BaseManager<SkillManager>
     public void EquipSkill(string name)
     {
         Skill skill = skillTree.skills.FirstOrDefault(s => s.name == name);
-        if (skill == default(Skill)) return;
+        if (skill == default) return;
         EquipSkill(skill);
     }
 
@@ -121,36 +121,57 @@ public class SkillManager : BaseManager<SkillManager>
     #region 技能檢視
 
     // 技能名稱檢視(戰鬥模塊)
-    public string GetSkillName(string arrange)
+    public string GetSkillName(SkillType type)
     {
-        if (skillTree.equipedSkills.ContainsKey(arrange))
+        if (skillTree.equipedSkills.ContainsKey(type))
         {
-            return skillTree.equipedSkills[arrange].name;
+            return GetEquipedSkillByType(type).name;
         }
         else
         {
-            return "";
+            return "未裝備技能";
         }
     }
 
     // 技能描述檢視(戰鬥模塊)
-    public string GetSkillDescription(string arrange)
+    public string GetSkillDescription(SkillType type)
     {
-        if (skillTree.equipedSkills.ContainsKey(arrange))
+        if (skillTree.equipedSkills.ContainsKey(type))
         {
-            return skillTree.equipedSkills[arrange].description;
+            return GetEquipedSkillByType(type).name;
         }
         else
         {
-            return "";
+            return "未裝備技能";
         }
     }
 
     #endregion
 
+    public Skill GetSkillById(uint id)
+    {
+        return skillTree.skills.FirstOrDefault(s => s.id == id);
+    }
+
+    public Skill GetEquipedSkillByType(SkillType type)
+    {
+        if (!skillTree.equipedSkills.ContainsKey(type)) return default;
+        if (skillTree.equipedSkills[type] == default) return default;
+        return GetSkillById(skillTree.equipedSkills[type]);
+    }
+
+}
+
+public enum SkillType
+{
+    BasicSkill = 0,
+    SkillA = 1,
+    SkillB = 2,
+    Ultimate = 3,
 }
 
 public enum ClassType
 {
     SwordMan = 0,
+    Sworder = 1,
 }

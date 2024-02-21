@@ -167,9 +167,8 @@ public class SkillTreeUI : BaseManager<SkillTreeUI>
         string skills = "";
         foreach (var pair in skillManager.skillTree.equipedSkills)
         {
-            if (pair.Value != null)
-                if (pair.Value.name != "")
-                    skills += pair.Value.arrange + ": " + pair.Value.name + "\n";
+            if (pair.Value == default) continue;
+            skills += $"{skillManager.GetSkillById(pair.Value).type} : {skillManager.GetSkillById(pair.Value).name}\n";
         }
         skillText.text = skills;
     }

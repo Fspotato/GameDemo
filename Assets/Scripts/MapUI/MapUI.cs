@@ -74,7 +74,7 @@ public class MapUI : MonoBehaviour
         lineObj.transform.SetAsFirstSibling();
         mapLines.Add(new MapLine(lineObj, from, to));
 
-        lm.SetFloat("_LineWidth", 10f);
+        lm.SetFloat("_LineWidth", 7.5f);
     }
 
     private void ReCalculateLineShader()

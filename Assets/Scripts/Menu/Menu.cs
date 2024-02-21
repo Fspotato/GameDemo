@@ -43,17 +43,15 @@ public class Menu : BaseManager<Menu>
         switch (type)
         {
             case MenuClickType.StartGameWithSwordMan:
-                DataManager.Instance.NewGame(10001);
-                SkillManager.Instance.CreateSkillTree(ClassType.SwordMan);
-                // 設置初始技能 劈砍
-                SkillManager.Instance.UnLockSkill("劈砍");
-                SkillManager.Instance.EquipSkill("劈砍");
-                SkillManager.Instance.UnLockSkill("守護");
-                SkillManager.Instance.EquipSkill("守護");
-                SkillManager.Instance.UnLockSkill("鬥氣");
-                SkillManager.Instance.EquipSkill("鬥氣");
+                DataManager.Instance.NewGame(ClassType.Sworder);
+                SkillManager.Instance.CreateSkillTree(ClassType.Sworder);
+                // 設置初始技能
+                SkillManager.Instance.UnLockSkill("飛劍");
+                SkillManager.Instance.EquipSkill("飛劍");
                 SkillTreeUI.Instance.SetNodeStates();
                 SkillTreeUI.Instance.ShowEquipedSkill();
+                // 獲得初始道具
+                DataManager.Instance.GetEntity("基礎劍胎");
                 break;
         }
         MapManager.Instance.GenerateNewMap();

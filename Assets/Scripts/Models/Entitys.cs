@@ -50,12 +50,10 @@ public enum EntityKey // 屬性索引枚舉
     Lvl = 2,
     Hp = 3,
     Mp = 4,
-    Atk = 5,
+    Attack = 5,
     Def = 6,
     Description = 7,
     Speical = 8,
-    CanLearn = 9,
-    Amount = 10,
 }
 
 [Serializable]

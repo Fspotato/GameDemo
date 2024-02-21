@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BattleNew;
 
 public class MapPlayerCtrl : MonoBehaviour
 {

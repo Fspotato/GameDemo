@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BattleNew;
 
 [CreateAssetMenu(menuName = "Events/DesertedCellar")]
 public class DesertedCellar : Event

@@ -46,10 +46,15 @@ public class DataManager : BaseManager<DataManager>
 
     // 開啟新遊戲 根據選擇的職業創建角色
     // 待完善 目前只初始化了職業
-    public void NewGame(uint id)
+    public void NewGame(ClassType type)
     {
         backpack = new SerializableDictionary<uint, Entity>();
-        GetEntity(id);
+        switch (type)
+        {
+            case ClassType.Sworder:
+                GetEntity(10001);
+                break;
+        }
         GetMoney(500);
     }
 
@@ -64,9 +69,18 @@ public class DataManager : BaseManager<DataManager>
         }
         else
         {
+            if (!entityConfigs.ContainsKey(id)) return;
             Entity e = new Entity(entityConfigs[id].DeepCopy());
             backpack.Add(id, e);
         }
+    }
+
+    // 得到道具 名稱重載
+    public void GetEntity(string name)
+    {
+        var temp = entityConfigs.FirstOrDefault(e => e.Value.StrValue[EntityKey.Name] == name).Value;
+        if (temp == null) return;
+        GetEntity(temp.ID);
     }
 
     // 得到多個道具重載
@@ -93,6 +107,7 @@ public class DataManager : BaseManager<DataManager>
         return entityConfigs[id].StrValue[EntityKey.Name];
     }
 
+    // 得到道具描述
     public string GetEntityDescriptionByID(uint id)
     {
         if (!entityConfigs.ContainsKey(id)) return "找不到道具";
@@ -109,8 +124,7 @@ public class DataManager : BaseManager<DataManager>
     public bool CheckItemExist(string name)
     {
         uint id = backpack.FirstOrDefault(e => e.Value.StrValue[EntityKey.Name] == name).Key;
-        if (id == default) return false;
-        return true;
+        return id != default;
     }
 
     #endregion
@@ -160,6 +174,13 @@ public class DataManager : BaseManager<DataManager>
         return backpack.FirstOrDefault(e => e.Value.Type == EntityType.Player).Value.IntValue[EntityKey.Hp];
     }
 
+    // 讀取目前角色攻擊力
+    public int GetPlayerAttack()
+    {
+        if (backpack == null) return 0;
+        return backpack.FirstOrDefault(e => e.Value.Type == EntityType.Player).Value.IntValue[EntityKey.Attack];
+    }
+
     // 設置目前角色剩餘血量
     public void SetPlayerHp(int hp)
     {
@@ -174,6 +195,7 @@ public class DataManager : BaseManager<DataManager>
         if (backpack == null) return 0;
         return entityConfigs.FirstOrDefault(e => e.Value.Type == EntityType.Player).Value.IntValue[EntityKey.Hp];
     }
+
     #endregion
 
     private void OnApplicationQuit()

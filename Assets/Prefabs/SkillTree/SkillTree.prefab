@@ -1740,7 +1740,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   configs:
-  - {fileID: 11400000, guid: ec3be03b94d102e4989c16ab4b488853, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 5b114407a98ce1648a3ccc328228e06c, type: 2}
   skillTree:
     skills:
       list: []
@@ -1748,8 +1749,8 @@ MonoBehaviour:
     unLockedSkills:
       list: []
     equipedSkills:
-      keys: []
-      values: []
+      keys: 
+      values: 
 --- !u!114 &8901476346614103714
 MonoBehaviour:
   m_ObjectHideFlags: 0

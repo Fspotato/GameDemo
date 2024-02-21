@@ -5,9 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class Skill
 {
+    public uint id;
     public string name;
     public string description;
-    public string arrange;
+    public SkillType type;
     public Point point;
     public SerializableList<Point> frontSkills = new SerializableList<Point>();
     public Vector2 position;
