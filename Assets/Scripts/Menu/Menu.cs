@@ -91,7 +91,15 @@ public class Menu : BaseManager<Menu>
     // 進入選單 (0:起始頁面 1:選擇模式 2:選擇角色)
     public void ToProcess()
     {
-        switch (processIndex)
+        newGame.SetActive(processIndex == 0 ? true : false);
+        continueGame.SetActive(processIndex == 0 ? true : false);
+        exit.SetActive(processIndex == 0 ? true : false);
+        normal.SetActive(processIndex == 1 ? true : false);
+        comingSoon.SetActive(processIndex == 1 ? true : false);
+        back.SetActive(processIndex > 0 ? true : false);
+        for (int i = 0; i < characters.Length; i++)
+            characters[i].SetActive(processIndex == 2 ? true : false);
+        /*switch (processIndex)
         {
             case 0:
                 newGame.SetActive(true);
@@ -114,16 +122,16 @@ public class Menu : BaseManager<Menu>
                     characters[i].SetActive(false);
                 break;
             case 2:
-                newGame.SetActive(true);
+                newGame.SetActive(false);
                 continueGame.SetActive(false);
-                exit.SetActive(true);
+                exit.SetActive(false);
                 normal.SetActive(false);
                 comingSoon.SetActive(false);
                 back.SetActive(true);
                 for (int i = 0; i < characters.Length; i++)
                     characters[i].SetActive(true);
                 break;
-        }
+        }*/
     }
 
     // 離開選單至遊戲

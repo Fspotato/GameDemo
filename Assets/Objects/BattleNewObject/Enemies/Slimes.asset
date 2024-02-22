@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cee313e23da74fc4b9ba12a6dd2df45f, type: 3}
-  m_Name: Goblins
+  m_Name: Slimes
   m_EditorClassIdentifier: 
-  Type: 2
+  Type: 1
   Enemies:
     list:
-    - {fileID: 7446244511844812435, guid: 17fdeaa4fd76c454a8f1fc8943eaaf92, type: 3}
-    - {fileID: 7446244511844812435, guid: 61019b2cc09e84241ae9946cdecfc198, type: 3}
-    - {fileID: 7446244511844812435, guid: 2e865b759428c2944bbd7733eafb820a, type: 3}
+    - {fileID: 1345144681195706241, guid: 9e326fb72ae856249894c9c38b5385e7, type: 3}
+    - {fileID: 2124996144561172249, guid: 82aa1813186a41746b5176008f92efd2, type: 3}

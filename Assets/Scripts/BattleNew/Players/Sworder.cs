@@ -23,18 +23,20 @@ namespace BattleNew
             if (instance == null) instance = this;
         }
 
-        public override void FirstTurn()
-        {
-            base.FirstTurn();
-            SelectSword();
-        }
-
+        // 執行順序 ItemCheck > FirstTurn > StartTurn (可參照 Player.LoadData())
         // 道具檢查
         public override void ItemCheck()
         {
             base.ItemCheck();
-            swordSouls.Clear();
+            swordSouls.Clear(); swords.Clear(); selectedSword = null;
             if (DataManager.Instance.CheckItemExist("基礎劍胎")) swordSouls.Add(swordSoulsConfig.FirstOrDefault(ss => ss.Type == SwordType.BasicSword));
+        }
+
+        // 首回合特殊動作
+        public override void FirstTurn()
+        {
+            base.FirstTurn();
+            SelectSword();
         }
 
         // 回合開始
@@ -83,6 +85,7 @@ namespace BattleNew
                 default:
                     break;
             }
+            SworderUI.Instance.FadeOut(SkillManager.Instance.GetSkillById(id).name);
         }
 
         // 選擇目前的劍 供外部調用

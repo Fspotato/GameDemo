@@ -141,18 +141,18 @@ public class SkillTreeUI : BaseManager<SkillTreeUI>
             node.SetState(SkillNodeState.Locked);
         }
 
-        foreach (var point in skillManager.skillTree.unLockedSkills)
+        foreach (var id in skillManager.skillTree.unLockedSkills)
         {
-            skillNodes.FirstOrDefault(n => n.skill.point.Equals(point)).SetState(SkillNodeState.UnLocked);
+            skillNodes.FirstOrDefault(n => n.skill.id.Equals(id)).SetState(SkillNodeState.UnLocked);
         }
 
         foreach (var node in skillNodes)
         {
             if (node.state != SkillNodeState.Hidden) continue;
 
-            foreach (var point in node.skill.frontSkills)
+            foreach (var id in node.skill.frontSkills)
             {
-                if (skillManager.skillTree.unLockedSkills.FirstOrDefault(p => p.Equals(point)) != default(Point))
+                if (skillManager.skillTree.unLockedSkills.FirstOrDefault(i => i.Equals(id)) != default)
                 {
                     node.SetState(SkillNodeState.Locked);
                     continue;
@@ -208,10 +208,10 @@ public class SkillTreeUI : BaseManager<SkillTreeUI>
         }
     }
 
-    // 根據點位獲取 SkillNode
-    SkillNode GetNode(Point point)
+    // 根據id獲取 SkillNode
+    SkillNode GetNode(uint id)
     {
-        return skillNodes.FirstOrDefault(n => n.skill.point.Equals(point));
+        return skillNodes.FirstOrDefault(n => n.skill.id.Equals(id));
     }
 
     #endregion

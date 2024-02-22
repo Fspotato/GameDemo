@@ -8,9 +8,11 @@ namespace BattleNew
     {
         [SerializeField] List<GameObject> swords = new List<GameObject>();
 
-        public override void BattleStart()
+        public override void BattleEnd()
         {
-            base.BattleStart();
+            base.BattleEnd();
+            for (int i = 0; i < swords.Count; i++) Destroy(swords[i]);
+            swords.Clear();
         }
 
         // 同步Sworder的劍丸池

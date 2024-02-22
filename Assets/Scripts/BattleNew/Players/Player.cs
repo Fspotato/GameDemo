@@ -18,14 +18,7 @@ namespace BattleNew
             Buffs = new BuffManager();
             ItemCheck();
             FirstTurn();
-            BattleUI.Instance.ShowHpBar(hp, maxHp);
-        }
-
-        // 首回合特殊行動
-        public virtual void FirstTurn()
-        {
             StartTurn();
-            BattleUI.Instance.ShowHpBar(hp, maxHp);
         }
 
         // 道具檢查
@@ -51,15 +44,22 @@ namespace BattleNew
         // 技能使用
         public virtual void UseSkill(uint id, Enemy enemy, List<GameObject> enemies) { }
 
-        // 回合開始特殊動作
+        // 首回合特殊行動
+        public virtual void FirstTurn() { }
+
+        // 每回合開始特殊動作
         public virtual void StartTurn()
         {
+            BattleUI.Instance.ShowHpBar(hp, maxHp);
             BuffCheckBeforeAttack();
             Buffs.RoundOver();
         }
 
-        // 回合結束特殊動作
+        // 每回合結束特殊動作
         public virtual void EndTurn() { }
+
+        // 戰鬥結束特殊動作
+        public virtual void BattleEnd() { }
 
         #region Buff檢查
 

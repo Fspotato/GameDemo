@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -6418611729499848025}
   - component: {fileID: 3096026448693206535}
   m_Layer: 0
-  m_Name: Goblin
+  m_Name: GoblinArcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,12 +124,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25644467a0ee4ca498a4781fce66a199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 30
-  maxHp: 30
-  attack: 1
+  hp: 13
+  maxHp: 13
+  attack: 3
   Buffs:
     buffs: []
-  enemyName: Goblin
+  enemyName: Goblin Archer
   isBoss: 0
   isElite: 0
   type: 2

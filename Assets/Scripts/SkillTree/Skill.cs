@@ -1,20 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Skill
 {
+    public Image blueprint;
     public uint id;
     public string name;
     public string description;
     public SkillType type;
-    public Point point;
-    public SerializableList<Point> frontSkills = new SerializableList<Point>();
+    public SerializableList<uint> frontSkills = new SerializableList<uint>();
     public Vector2 position;
     public int require;
     public bool unLocked;
     public bool isEquiped;
+    public bool isEnabled;
 
     public bool Equals(Skill skill)
     {

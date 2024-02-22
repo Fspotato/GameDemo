@@ -21,7 +21,7 @@ namespace BattleNew
         int selectedIndex = 0;
         BattleClickable selectedSkill;
 
-        readonly float downOffset = 1f; // 角色和怪物物件位置向下偏移值
+        readonly float downOffset = 0.5f; // 角色和怪物物件位置向下偏移值
         readonly float spacing = 0.5f; // 怪物物件位置之間的間距
 
         bool bossExist;
@@ -78,6 +78,7 @@ namespace BattleNew
         public void BattleEnd(bool winLose)
         {
             for (int i = 0; i < enemies.Length; i++) if (enemies[i] != null) Destroy(enemies[i]);
+            ui.BattleEnd();
             if (winLose)
             {
                 PlayerUI.Instance.gameObject.SetActive(true);
@@ -93,15 +94,16 @@ namespace BattleNew
             List<EnemyConfig> config = new List<EnemyConfig>();
             if (type == BattleType.Boss && bossExist == false) config = configs.FindAll(c => c.Type == EnemyType.Boss);
             if (enemyTypes != null && config.Count == 0) config = configs.FindAll(c => enemyTypes.Contains(c.Type));
-            config = configs.FindAll(c => c.Type != EnemyType.Boss);
+            if (config.Count == 0) config = configs.FindAll(c => c.Type != EnemyType.Boss);
             return config;
         }
 
         // 怪物設置
         private void SetEnemies()
         {
-            int rnd = Random.Range(2, 4);
             bossExist = false;
+
+            int rnd = Random.Range(1, 3);
 
             for (int i = 0; i < rnd; i++)
             {
@@ -123,13 +125,15 @@ namespace BattleNew
                 enemies[i] = Instantiate(tempConfigs[cRnd].Enemies[eRnd], transform);
             }
 
-            if (enemies[0].GetComponent<Enemy>().IsBoss)
+            // 交換Boss位置 如果Boss在第一位
+            if (enemies[1] != null && enemies[0].GetComponent<Enemy>().IsBoss)
             {
                 GameObject temp = enemies[0];
                 enemies[0] = enemies[1];
                 enemies[1] = temp;
             }
 
+            // 設置初始位置
             float offset = 0f;
             for (int i = 0; i < rnd; i++)
             {
@@ -139,6 +143,15 @@ namespace BattleNew
                 offset += er.bounds.size.x + spacing;
             }
 
+            // 計算位移 如果只有一個敵人
+            if (enemies[1] == null)
+            {
+                enemies[0].transform.position = new Vector2(4.2375f, enemies[0].transform.position.y);
+                enemies[0].GetComponent<Enemy>().ShowData();
+                return;
+            }
+
+            // 計算位移
             offset = 4.2375f - enemies[1].transform.position.x;
             for (int i = 0; i < rnd; i++)
             {

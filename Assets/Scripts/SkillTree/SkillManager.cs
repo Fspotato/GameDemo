@@ -11,11 +11,10 @@ public class SkillManager : BaseManager<SkillManager>
 
     public SkillTree skillTree;
 
-    // 依照選擇職業創建技能樹 (0:劍士)
+    // 依照選擇職業創建技能樹 (0:劍士 1:執劍者)
     public void CreateSkillTree(ClassType type)
     {
-        int index = (int)type;
-        skillTree = new SkillTree(configs[index].DeepCopy());
+        skillTree = new SkillTree(configs[(int)type].DeepCopy());
         GetSkillPoint(10);
         SkillTreeUI.Instance.ShowSkillTree(skillTree);
         SaveSkillTree();
@@ -59,7 +58,7 @@ public class SkillManager : BaseManager<SkillManager>
         if (skillTree.SkillPoint >= skill.require)
         {
             UseSkillPoint(skill.require);
-            skillTree.unLockedSkills.Add(skill.point);
+            skillTree.unLockedSkills.Add(skill.id);
             skill.unLocked = true;
             SkillTreeUI.Instance.ShowSkillBox(skill);
         }

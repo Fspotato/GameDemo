@@ -11,10 +11,12 @@ namespace BattleNew
         [SerializeField] protected string enemyName;
         [SerializeField] protected bool isBoss;
         [SerializeField] protected bool isElite;
+        [SerializeField] protected EnemyType type;
 
         public string Name => enemyName;
         public bool IsBoss => isBoss;
         public bool IsElite => isElite;
+        public EnemyType Type => type;
 
         GameObject info;
 
@@ -32,6 +34,7 @@ namespace BattleNew
             BuffCheckBeforeAttack();
             if (isDead) return;
             player.TakeDamage(attack);
+            print($"{Name} 發動了攻擊!");
             Buffs.RoundOver();
         }
 
@@ -45,7 +48,7 @@ namespace BattleNew
         // 顯示怪物資訊
         public void ShowData()
         {
-            if (info == null) info = ABManager.Instance.LoadRes<GameObject>("battle", "enemyinfo");
+            if (info == null) info = ABManager.Instance.LoadRes<GameObject>("battlenew", "enemyinfo");
             else info.SetActive(true);
 
             if (!gameObject.activeSelf)
@@ -65,7 +68,11 @@ namespace BattleNew
         public void OnDrop(PointerEventData data)
         {
             GetComponent<SpriteRenderer>().color = Color.white;
-            data.pointerDrag.GetComponent<Sword>().Effect(this);
+            if (data.pointerDrag.GetComponent<Sword>() != null)
+            {
+                Sworder.Instance.SelectSword(data.pointerDrag.GetComponent<Sword>());
+                Sworder.Instance.UseSkill(30001, this, BattleManager.Instance.GetEnemies());
+            }
         }
 
         public void OnPointerEnter(PointerEventData eventData)

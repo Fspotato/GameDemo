@@ -10,7 +10,7 @@ public class SkillTree
 
     public int SkillPoint;
 
-    public SerializableList<Point> unLockedSkills = new SerializableList<Point>();
+    public SerializableList<uint> unLockedSkills = new SerializableList<uint>();
     public SerializableDictionary<SkillType, uint> equipedSkills = new SerializableDictionary<SkillType, uint>();
 
     public SkillTree(SerializableList<Skill> skills)

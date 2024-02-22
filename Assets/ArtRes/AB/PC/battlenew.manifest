@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 184159644
+CRC: 4217055333
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6ca36425c9a5e825314409493a8b4a07
+    Hash: e317ba371726cf20253558c33aa0b846
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 49390e79ec1042c3b43d44e71e700b94
+    Hash: bf4140ba95f2e2191ad2984b67c44818
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -30,8 +30,6 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 1b2c61381664c464b868ea8d6318f5cc, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 427b7a786546aaa40a77054307e2bbed, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
@@ -49,6 +47,14 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 88a6a32b67f60d5448d83bb16e45f298, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 3d57f135c9a4e19409cffb30b99ca398, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d326e5dc97acc3c41b2ed0ed755bbc82, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 25644467a0ee4ca498a4781fce66a199, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ab6d2768c4f3dc942b0d433eaa83b887, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3c23ef8b5e39aac40bdd505cf4014049, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -90,8 +96,11 @@ SerializeReferenceClassIdentifiers:
   ClassName: UnityEngine.UI.SpriteState
 Assets:
 - Assets/Prefabs/BattleNew/Players/Sworder.prefab
+- Assets/Prefabs/BattleNew/EnemyInfo.prefab
+- Assets/Prefabs/BattleNew/Enemies/GoblinArcher.prefab
 - Assets/Prefabs/BattleNew/BattleManager.prefab
 - Assets/Prefabs/BattleNew/Enemies/Goblin.prefab
 - Assets/Objects/BattleNewObject/Enemies/Goblins.asset
+- Assets/Prefabs/BattleNew/Enemies/GoblinRider.prefab
 - Assets/Prefabs/BattleNew/Aim.prefab
 Dependencies: []

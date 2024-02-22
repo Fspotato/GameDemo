@@ -11,9 +11,19 @@ namespace BattleNew
         [SerializeField] BattleManager battleManager;
         [SerializeField] Text skillName;
         [SerializeField] Text skillDescription;
+        [SerializeField] Text fadeOutText;
+
+        [SerializeField] float fadeTime = 1f;
+        IEnumerator fading;
 
         // 戰鬥開始
         public virtual void BattleStart() { }
+
+        // 戰鬥結束
+        public virtual void BattleEnd()
+        {
+            fadeOutText.text = "";
+        }
 
         // 結束回合
         public void EndTurn()
@@ -47,6 +57,29 @@ namespace BattleNew
         {
             skillName.text = "";
             skillDescription.text = "";
+        }
+
+        // 使用技能提示字
+        public void FadeOut(string skillName)
+        {
+            if (fading != null) StopCoroutine(fading);
+            fading = IEFadeOut(skillName);
+            if (gameObject.activeInHierarchy) StartCoroutine(fading);
+        }
+
+        private IEnumerator IEFadeOut(string skillName)
+        {
+            float elapsedTime = 0f;
+            Color tColor = fadeOutText.color;
+            fadeOutText.text = skillName;
+
+            while (elapsedTime < fadeTime)
+            {
+                elapsedTime += Time.deltaTime;
+                float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeTime);
+                fadeOutText.color = new Color(tColor.r, tColor.g, tColor.b, alpha);
+                yield return null;
+            }
         }
     }
 }

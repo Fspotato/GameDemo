@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1076610113
+CRC: 3217945706
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b557098da514359f10c7c3f84ba5648a
+    Hash: 4e658871d3a89e547210b3949d9e1a7c
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 3996f47e4cbcb5f7f0a39b98dc8da415
+    Hash: d2290b08254db733c5e88cd0fedffa94
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -49,13 +49,11 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers:
 - AssemblyName: Assembly-CSharp
-  ClassName: Point
-- AssemblyName: Assembly-CSharp
   ClassName: SerializableDictionary`2[SkillType,System.UInt32]
 - AssemblyName: Assembly-CSharp
-  ClassName: SerializableList`1[Point]
-- AssemblyName: Assembly-CSharp
   ClassName: SerializableList`1[Skill]
+- AssemblyName: Assembly-CSharp
+  ClassName: SerializableList`1[System.UInt32]
 - AssemblyName: Assembly-CSharp
   ClassName: Skill
 - AssemblyName: Assembly-CSharp
