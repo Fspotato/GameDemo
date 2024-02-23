@@ -1,6 +1,7 @@
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using BattleNew;
 
 
 public class DataManager : BaseManager<DataManager>
@@ -9,6 +10,7 @@ public class DataManager : BaseManager<DataManager>
     // 遊戲設定檔和背包 (最重要的檔案) 基本上整個遊戲中都會使用
     public SerializableDictionary<uint, EntityConfig> entityConfigs;
     public SerializableDictionary<uint, Entity> backpack;
+    public SerializableDictionary<uint, Buff> buffConfigs;
 
     // 讀取設定檔
     public void LoadConfig()
@@ -16,6 +18,9 @@ public class DataManager : BaseManager<DataManager>
         TextAsset ab = ABManager.Instance.LoadRes<TextAsset>("config", "config.json");
         string json = ab.text;
         entityConfigs = JsonUtility.FromJson<SerializableDictionary<uint, EntityConfig>>(json);
+        ab = ABManager.Instance.LoadRes<TextAsset>("config", "BuffConfig.json");
+        json = ab.text;
+        buffConfigs = JsonUtility.FromJson<SerializableDictionary<uint, Buff>>(json);
         ABManager.Instance.UnLoad("config");
     }
 
@@ -100,20 +105,6 @@ public class DataManager : BaseManager<DataManager>
         }
     }
 
-    // 得到道具名稱
-    public string GetEntityNameById(uint id)
-    {
-        if (!entityConfigs.ContainsKey(id)) return "找不到道具";
-        return entityConfigs[id].StrValue[EntityKey.Name];
-    }
-
-    // 得到道具描述
-    public string GetEntityDescriptionByID(uint id)
-    {
-        if (!entityConfigs.ContainsKey(id)) return "找不到道具";
-        return entityConfigs[id].StrValue[EntityKey.Description];
-    }
-
     // 檢查是否有某道具
     public bool CheckItemExist(uint id)
     {
@@ -194,6 +185,30 @@ public class DataManager : BaseManager<DataManager>
     {
         if (backpack == null) return 0;
         return entityConfigs.FirstOrDefault(e => e.Value.Type == EntityType.Player).Value.IntValue[EntityKey.Hp];
+    }
+
+    #endregion
+
+    #region 設定檔讀取
+
+    // 得到道具名稱
+    public string GetEntityNameById(uint id)
+    {
+        if (!entityConfigs.ContainsKey(id)) return "找不到道具";
+        return entityConfigs[id].StrValue[EntityKey.Name];
+    }
+
+    // 得到道具描述
+    public string GetEntityDescriptionByID(uint id)
+    {
+        if (!entityConfigs.ContainsKey(id)) return "找不到道具";
+        return entityConfigs[id].StrValue[EntityKey.Description];
+    }
+
+    // 獲得Buff
+    public Buff GetBuffById(uint id)
+    {
+        return buffConfigs[id].DeepCopy();
     }
 
     #endregion

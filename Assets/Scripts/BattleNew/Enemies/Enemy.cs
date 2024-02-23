@@ -35,7 +35,7 @@ namespace BattleNew
             if (isDead) return;
             player.TakeDamage(attack);
             print($"{Name} 發動了攻擊!");
-            Buffs.RoundOver();
+            BuffManager.RoundOver();
         }
 
         // 恢復血量
@@ -91,9 +91,9 @@ namespace BattleNew
         public override void BuffCheckBeforeAttack()
         {
             base.BuffCheckBeforeAttack();
-            foreach (var buff in Buffs.Buffs)
+            foreach (var buff in BuffManager.Buffs)
             {
-                switch (buff.Type)
+                switch (buff.Type[0])
                 {
                     case BuffType.Ignite:
                         print($"{Name} 受到了 {buff.Value * buff.Stack} 點 燃燒傷害!");

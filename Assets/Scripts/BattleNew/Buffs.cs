@@ -13,34 +13,35 @@ namespace BattleNew
 
         [SerializeField] List<Buff> buffs = new List<Buff>();
 
-        public void GetBuff(BuffType type, int id, float value, int stack, int maxStack, int round)
+        // 開場清除Buff
+        public void Reset()
+        {
+            buffs.Clear();
+        }
+
+        // 獲得Buff(id參照BuffConfig表, value, round 必填, stack, maxStack不填則自動視為1層及不變)
+        public void GetBuff(uint id, float value, int round, int stack = -1, int maxStack = -1)
         {
             Buff buff = buffs.FirstOrDefault(b => b.Id == id);
-            if (buff == default(Buff))
-            {
-                buff = new Buff(type, id, value, stack, maxStack, round);
-                buffs.Add(buff);
-            }
-            else
-            {
-                buff.GetBuff(value, stack, round);
-            }
+            if (buff == default) buffs.Add(new Buff(id, value, round, stack, maxStack));
+            else buff.GetBuff(value, round, stack, maxStack);
         }
 
-        public void RemoveBuff(BuffType type)
+        // 移除指定種類Buff 可以一次指定多種
+        public void RemoveBuffs(params BuffType[] type)
         {
-            Buff buff = buffs.FirstOrDefault(b => b.Type == type);
-            if (buff == default(Buff)) return;
-            buffs.Remove(buff);
+            List<Buff> temp = new List<Buff>();
+            foreach (var buff in buffs)
+                foreach (var t in buff.Type)
+                {
+                    if (!type.Contains(t)) continue;
+                    temp.Add(buff);
+                    break;
+                }
+            foreach (var buff in temp) buffs.Remove(buff);
         }
 
-        public void RemoveBuff(BuffType type, int stack)
-        {
-            Buff buff = buffs.FirstOrDefault(b => b.Type == type);
-            if (buff == default(Buff)) return;
-            if (buff.RemoveBuff(stack)) buffs.Remove(buff);
-        }
-
+        // 回合結束
         public void RoundOver()
         {
             if (buffs.Count == 0) return;
@@ -54,32 +55,29 @@ namespace BattleNew
     [Serializable]
     public class Buff
     {
-        public BuffType Type => type;
-        public int Id => id;
+        public uint Id => id;
+        public string Name => name;
+        public List<BuffType> Type => type;
         public int Round => round;
         public float Value => value;
         public int Stack => stack;
         public int MaxStack => maxStack;
 
-        [SerializeField] BuffType type;
-        [SerializeField] int id;
+        [SerializeField] uint id;
+        [SerializeField] string name;
+        [SerializeField] List<BuffType> type;
         [SerializeField] float value;
         [SerializeField] int round;
         [SerializeField] int stack;
         [SerializeField] int maxStack;
 
-        public void GetBuff(float value, int stack, int round)
+        public void GetBuff(float value, int round, int stack, int maxStack)
         {
-            if (value >= this.value) this.value = value;
-            if (round >= this.round) this.round = round;
-            this.stack += stack;
+            this.value = Mathf.Max(this.value, value);
+            this.round = Math.Max(this.round, round);
+            this.stack += stack == -1 ? 1 : stack;
+            this.maxStack = Math.Max(this.maxStack, maxStack);
             this.stack = Math.Min(this.stack, maxStack);
-        }
-
-        public bool RemoveBuff(int stack)
-        {
-            this.stack -= stack;
-            return stack <= 0 ? true : false;
         }
 
         public bool RoundOver()
@@ -88,15 +86,30 @@ namespace BattleNew
             return round <= 0 ? true : false;
         }
 
-        public Buff(BuffType type, int id, float value, int stack, int maxStack, int round)
+        public Buff(uint id, float value, int round, int stack, int maxStack)
         {
-            this.type = type;
+            Buff buff = DataManager.Instance.GetBuffById(id);
             this.id = id;
+            this.name = buff.name;
+            this.type = buff.type;
             this.value = value;
-            if (stack >= maxStack) stack = maxStack;
-            this.stack = stack;
-            this.maxStack = maxStack;
             this.round = round;
+            this.stack = stack == -1 ? 1 : stack;
+            this.maxStack = maxStack == -1 ? buff.maxStack : maxStack;
+        }
+
+        // 建表用的 不要亂調用
+        public Buff(uint id, List<BuffType> type, string name, int maxStack)
+        {
+            this.id = id;
+            this.type = type;
+            this.name = name;
+            this.maxStack = maxStack;
+        }
+
+        public Buff DeepCopy()
+        {
+            return JsonUtility.FromJson<Buff>(JsonUtility.ToJson(this));
         }
     }
 
@@ -106,5 +119,8 @@ namespace BattleNew
         Ignite = 0,
         Forzen = 1,
         Guard = 2,
+        DeBuff = 3,
+        Buff = 4,
+        Bleeding = 5,
     }
 }

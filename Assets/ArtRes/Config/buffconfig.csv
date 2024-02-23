@@ -1,0 +1,7 @@
+﻿ID,Type,Name,MaxStack,備註(不會被讀入),,BuffType(不會被讀入),對應枚舉,,Buff的觸發會根據第一個Type
+50001,Bleeding/DeBuff,出血,3,,,正面Buff,Buff,,注意第一個Type一定要是主Buff
+50002,Ignite/DeBuff,燃燒,3,,,負面Buff,DeBuff,,後面的Type是判定用的
+50003,Forzen/DeBuff,寒冷,3,,,*出血,Bleeding,,後面的BuffType也可以是主Buff枚舉
+50004,Guard/Buff,守護,1,,,*燃燒,Ignite,,但就不會被觸發 只是判定效果的依據
+,,,,,,*寒冷,Forzen,,BuffType前面打*的為主Buff類型
+,,,,,,*守護,Guard,,"不同Buff間以 ""/"" 作為分隔"

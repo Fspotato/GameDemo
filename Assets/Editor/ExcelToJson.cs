@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using BattleNew;
 
 public class ExcelToJson
 {
-    [MenuItem("Custom Tool/.csv to .json")]
-    private static void CsvToJson()
+    [MenuItem("Custom Tool/EntityConfig.csv to .json")]
+    private static void EntityConfigCsvToJson()
     {
         // 通過編輯器的 Selection類 中的方法 獲取在Project窗口中選中的資源 如果沒有選中任何資源就退出
         UnityEngine.Object[] selectedAssets = Selection.GetFiltered(typeof(UnityEngine.Object), SelectionMode.DeepAssets);
         if (selectedAssets.Length == 0) return;
 
-        //SerializableList<EntityConfig> entityConfigs = new SerializableList<EntityConfig>(); // 用於放置所有實體資料
+        // 用於放置所有實體資料
         SerializableDictionary<uint, EntityConfig> entityConfigs = new SerializableDictionary<uint, EntityConfig>();
 
         string assetPath;
@@ -72,6 +73,60 @@ public class ExcelToJson
         string json = JsonUtility.ToJson(entityConfigs);
         File.WriteAllText(jsonPath, json);
         Debug.Log($"序列化完成, 已序列化{selectedAssets.Length}個文件, 已經文件存儲於預設地址");
+        AssetDatabase.Refresh();
+    }
+
+    [MenuItem("Custom Tool/BuffConfig.csv to .json")]
+    private static void BuffConfigCsvToJson()
+    {
+        // 通過編輯器的 Selection類 中的方法 獲取在Project窗口中選中的資源 如果沒有選中任何資源就退出
+        UnityEngine.Object[] selectedAssets = Selection.GetFiltered(typeof(UnityEngine.Object), SelectionMode.DeepAssets);
+        if (selectedAssets.Length == 0) return;
+
+        // 用於放置所有實體資料
+        SerializableDictionary<uint, Buff> buffConfigs = new SerializableDictionary<uint, Buff>();
+
+        string assetPath;
+        string[] temp;
+
+        foreach (UnityEngine.Object asset in selectedAssets)
+        {
+            // 獲取資源位置
+            assetPath = AssetDatabase.GetAssetPath(asset);
+            // 檢測資源用 若有不是 csv 檔的資源則報錯退出
+            temp = assetPath.Split('/');
+            if (temp[temp.Length - 1].Split('.')[1] != "csv")
+            {
+                Debug.LogError("選中的資源中有不是csv檔的資源 請重新選擇!");
+                return;
+            }
+
+            // 讀出csv中所有資源
+            string[] configs = File.ReadAllLines(assetPath);
+
+            Buff buff;
+            string[] configValues; // 0:Id(uint) , 1:Types(List<BuffType>) , 2:Name(string) , 3: MaxStack(int)
+            List<BuffType> types = new List<BuffType>();
+            // 將每行 BuffConfig 逐一放入 BuffConfigs中 從1開始讀 因為第0行是屬性行
+            for (int i = 1; i < configs.Length; i++)
+            {
+                configValues = configs[i].Replace("\"", "").Split(',');
+                if (configValues[0] == "") break;
+                types.Clear();
+                foreach (string type in configValues[1].Split('/'))
+                {
+                    types.Add(Enum.Parse<BuffType>(type));
+                }
+                buff = new Buff(uint.Parse(configValues[0]), types, configValues[2], int.Parse(configValues[3]));
+                buffConfigs.Add(buff.Id, buff);
+            }
+        }
+
+        // 全部讀完後將資料轉成json格式並放進指定路徑中
+        string jsonPath = Application.dataPath + "/ArtRes/Config/BuffConfig.json";
+        string json = JsonUtility.ToJson(buffConfigs);
+        File.WriteAllText(jsonPath, json);
+        Debug.Log($"序列化完成, 已序列化{selectedAssets.Length}個文件為BuffConfig, 已經文件存儲於預設地址");
         AssetDatabase.Refresh();
     }
 }

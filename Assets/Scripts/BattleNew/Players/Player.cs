@@ -15,7 +15,7 @@ namespace BattleNew
             hp = DataManager.Instance.GetPlayerHp();
             maxHp = DataManager.Instance.GetPlayerMaxHp();
             attack = DataManager.Instance.GetPlayerAttack();
-            Buffs = new BuffManager();
+            BuffManager.Reset();
             ItemCheck();
             FirstTurn();
             StartTurn();
@@ -24,7 +24,7 @@ namespace BattleNew
         // 道具檢查
         public override void ItemCheck()
         {
-            if (DataManager.Instance.CheckItemExist("聖劍")) Buffs.GetBuff(BuffType.Guard, 12345, 5, 1, 1, 99);
+
         }
 
         // 受到傷害
@@ -52,11 +52,13 @@ namespace BattleNew
         {
             BattleUI.Instance.ShowHpBar(hp, maxHp);
             BuffCheckBeforeAttack();
-            Buffs.RoundOver();
         }
 
         // 每回合結束特殊動作
-        public virtual void EndTurn() { }
+        public virtual void EndTurn()
+        {
+            BuffManager.RoundOver();
+        }
 
         // 戰鬥結束特殊動作
         public virtual void BattleEnd() { }
@@ -67,9 +69,9 @@ namespace BattleNew
         public override void BuffCheckBeforeAttack()
         {
             base.BuffCheckBeforeAttack();
-            foreach (var buff in Buffs.Buffs)
+            foreach (var buff in BuffManager.Buffs)
             {
-                switch (buff.Type)
+                switch (buff.Type[0])
                 {
                     case BuffType.Ignite:
                         print($"你受到了 {BuffCheckOnTakeDamage(buff.Value * buff.Stack)} 點 燃燒傷害!");

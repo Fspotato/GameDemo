@@ -21,7 +21,7 @@ namespace BattleNew
         public float ExtraAttack => extraAttack;
         public float ExtraMaxHp => extraMaxHp;
         public bool IsDead => isDead;
-        public BuffManager Buffs;
+        public BuffManager BuffManager;
 
         // 道具檢查
         public virtual void ItemCheck() { }
@@ -53,9 +53,9 @@ namespace BattleNew
         // 攻擊前檢查
         public virtual void BuffCheckBeforeAttack()
         {
-            foreach (var buff in Buffs.Buffs)
+            foreach (var buff in BuffManager.Buffs)
             {
-                switch (buff.Type)
+                switch (buff.Type[0])
                 {
                     case BuffType.Ignite:
                         TakeDamage(buff.Value * buff.Stack);
@@ -82,9 +82,9 @@ namespace BattleNew
         // 受到傷害時檢查
         public float BuffCheckOnTakeDamage(float value)
         {
-            foreach (var buff in Buffs.Buffs)
+            foreach (var buff in BuffManager.Buffs)
             {
-                switch (buff.Type)
+                switch (buff.Type[0])
                 {
                     case BuffType.Guard:
                         value -= buff.Value * buff.Stack;
