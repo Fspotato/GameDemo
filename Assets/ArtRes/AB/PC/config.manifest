@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1971921533
+CRC: 3078112272
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 0df28600ff452529c0772f068aca9b91
+    Hash: 86e5c270dd24d2cae79271cec42d7570
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
@@ -13,6 +13,6 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/ArtRes/Config/config.json
 - Assets/ArtRes/Config/BuffConfig.json
+- Assets/ArtRes/Config/EntityConfig.json
 Dependencies: []

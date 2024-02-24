@@ -28,6 +28,8 @@ public class MapUI : MonoBehaviour
 
     public MapManager mapManager;
 
+    bool initialized = false;
+
     void Update()
     {
         ReCalculateLineShader();
@@ -35,6 +37,13 @@ public class MapUI : MonoBehaviour
 
     public void ShowMap(Map m)
     {
+        if (!initialized)
+        {
+            initialized = true;
+            mapLinePrefab = ABManager.Instance.LoadRes<GameObject>("art", "LinkLine");
+            materialPrefab = ABManager.Instance.LoadRes<Material>("art", "LineMaterial");
+        }
+
         ClearMap();
 
         CreateMapParent();

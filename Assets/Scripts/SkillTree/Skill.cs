@@ -24,3 +24,18 @@ public class Skill
         return name == skill.name;
     }
 }
+
+public enum SkillType
+{
+    BasicSkill = 0,
+    SkillA = 1,
+    SkillB = 2,
+    Ultimate = 3,
+    Passive = 4,
+}
+
+public enum ClassType
+{
+    SwordMan = 0,
+    Sworder = 1,
+}

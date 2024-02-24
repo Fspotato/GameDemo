@@ -15,7 +15,7 @@ public class DataManager : BaseManager<DataManager>
     // 讀取設定檔
     public void LoadConfig()
     {
-        TextAsset ab = ABManager.Instance.LoadRes<TextAsset>("config", "config.json");
+        TextAsset ab = ABManager.Instance.LoadRes<TextAsset>("config", "EntityConfig.json");
         string json = ab.text;
         entityConfigs = JsonUtility.FromJson<SerializableDictionary<uint, EntityConfig>>(json);
         ab = ABManager.Instance.LoadRes<TextAsset>("config", "BuffConfig.json");

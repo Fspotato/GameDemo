@@ -42,7 +42,10 @@ namespace BattleNew
         }
 
         // 技能使用
-        public virtual void UseSkill(uint id, Enemy enemy, List<GameObject> enemies) { }
+        public virtual void UseSkill(uint id, Enemy enemy, List<GameObject> enemies)
+        {
+            BattleUI.Instance.FadeOut(SkillManager.Instance.GetSkillById(id).name, Color.white, new Vector3(0f, 280f, 0f), false, false);
+        }
 
         // 首回合特殊行動
         public virtual void FirstTurn() { }
@@ -64,24 +67,6 @@ namespace BattleNew
         public virtual void BattleEnd() { }
 
         #region Buff檢查
-
-        // 攻擊前檢查
-        public override void BuffCheckBeforeAttack()
-        {
-            base.BuffCheckBeforeAttack();
-            foreach (var buff in BuffManager.Buffs)
-            {
-                switch (buff.Type[0])
-                {
-                    case BuffType.Ignite:
-                        print($"你受到了 {BuffCheckOnTakeDamage(buff.Value * buff.Stack)} 點 燃燒傷害!");
-                        break;
-                    case BuffType.Forzen:
-                        print($"你受到了 {BuffCheckOnTakeDamage(buff.Value * buff.Stack)} 點 寒冷傷害!");
-                        break;
-                }
-            }
-        }
 
         #endregion
     }

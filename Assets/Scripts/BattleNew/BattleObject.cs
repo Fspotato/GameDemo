@@ -32,6 +32,7 @@ namespace BattleNew
             if (isDead) return;
             value = BuffCheckOnTakeDamage(value);
             value = Mathf.Max(1f, value);
+            BattleUI.Instance.FadeOut($"-{value}", Color.red, Camera.main.WorldToScreenPoint(transform.localPosition), true, true);
             hp -= value;
             if (hp <= 0f)
             {
@@ -58,9 +59,16 @@ namespace BattleNew
                 switch (buff.Type[0])
                 {
                     case BuffType.Ignite:
+                        print($"{gameObject.name} 受到了 {buff.Value * buff.Stack} 點燃燒傷害!");
                         TakeDamage(buff.Value * buff.Stack);
                         break;
                     case BuffType.Forzen:
+                        print($"{gameObject.name} 受到了 {buff.Value * buff.Stack} 點寒冷傷害!");
+                        TakeDamage(buff.Value * buff.Stack);
+                        break;
+                    case BuffType.Bleeding:
+                        print($"{gameObject.name} 受到了 {buff.Value * buff.Stack} 點出血傷害!");
+                        if (GetComponent<Enemy>() != null && DataManager.Instance.CheckItemExist("血劍")) BattleManager.Instance.HealPlayer(buff.Value * buff.Stack * 0.1f);
                         TakeDamage(buff.Value * buff.Stack);
                         break;
                 }

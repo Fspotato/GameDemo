@@ -12,14 +12,16 @@ public class SkillTreeUI : BaseManager<SkillTreeUI>
     [SerializeField] GameObject skillBox;
     [SerializeField] GameObject content;
     [SerializeField] GameObject skillNodePrefab;
-    [SerializeField] GameObject linePrefab;
-    [SerializeField] Material lineMaterialPrefab;
 
     public List<SkillNode> skillNodes = new List<SkillNode>();
     public List<SkillLine> skillLines = new List<SkillLine>();
 
     SkillNode selected;
     GameObject nodeParent;
+    GameObject linePrefab;
+    Material lineMaterialPrefab;
+
+    bool initialized = false;
 
     void Update()
     {
@@ -31,6 +33,13 @@ public class SkillTreeUI : BaseManager<SkillTreeUI>
     // 展示技能樹
     public void ShowSkillTree(SkillTree tree)
     {
+        if (!initialized)
+        {
+            initialized = true;
+            linePrefab = ABManager.Instance.LoadRes<GameObject>("art", "LinkLine");
+            lineMaterialPrefab = ABManager.Instance.LoadRes<Material>("art", "LineMaterial");
+        }
+
         ClearTree();
 
         CreateParent();
@@ -196,16 +205,17 @@ public class SkillTreeUI : BaseManager<SkillTreeUI>
         skillBox.transform.Find("SkillDescription").GetComponent<Text>().text = skill.description;
         if (skill.unLocked)
         {
+            skillBox.transform.Find("UnLock").gameObject.SetActive(false);
             skillBox.transform.Find("Equip").gameObject.SetActive(true);
             if (skill.isEquiped) skillBox.transform.Find("Equip").Find("Text").GetComponent<Text>().text = "UnEquip";
             else skillBox.transform.Find("Equip").Find("Text").GetComponent<Text>().text = "Equip";
-            skillBox.transform.Find("UnLock").gameObject.SetActive(false);
         }
         else
         {
             skillBox.transform.Find("Equip").gameObject.SetActive(false);
             skillBox.transform.Find("UnLock").gameObject.SetActive(true);
         }
+        if (skill.type == SkillType.Passive) skillBox.transform.Find("Equip").gameObject.SetActive(false);
     }
 
     // 根據id獲取 SkillNode

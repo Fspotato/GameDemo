@@ -14,16 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skills:
     list:
-    - id: 30001
+    - blueprint: {fileID: 0}
+      id: 30001
       name: "\u98DB\u528D"
       description: "\u5C07\u528D\u4E38\u5411\u6575\u4EBA\u5C04\u51FA\uFF0C\u6839\u64DA\u5C04\u51FA\u7684\u528D\u4E38\u9020\u6210\u4E0D\u540C\u6548\u679C\u3002"
       type: 0
-      point:
-        x: 0
-        y: 0
       frontSkills:
-        list: []
+        list: 
       position: {x: 0, y: 0}
       require: 1
       unLocked: 0
       isEquiped: 0
+      isEnabled: 0
+    - blueprint: {fileID: 0}
+      id: 30002
+      name: "\u8840\u528D"
+      description: "\u7372\u5F97\u9053\u5177\"\u8840\u528D\"\u3002"
+      type: 4
+      frontSkills:
+        list: 31750000
+      position: {x: 0, y: 1}
+      require: 1
+      unLocked: 0
+      isEquiped: 0
+      isEnabled: 0

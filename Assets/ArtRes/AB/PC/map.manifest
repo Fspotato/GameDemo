@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 4018167630
+CRC: 1435882480
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c763f188c9a83d40a29bb24e88922084
+    Hash: e8b484aa31d05d51fa19452556b69a0e
   TypeTreeHash:
     serializedVersion: 2
     Hash: 85bc8355df24d79d389f8f60787a71ec
@@ -100,4 +100,5 @@ Assets:
 - Assets/Prefabs/Map/Map.prefab
 - Assets/Prefabs/Map/Node.prefab
 - Assets/Prefabs/Map/Line.prefab
-Dependencies: []
+Dependencies:
+- C:/UnityProjects/FinalDemo/Assets/ArtRes/AB/PC/art

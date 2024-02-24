@@ -61,8 +61,8 @@ namespace BattleNew
             info.transform.Find("EnemyHp").GetComponent<Text>().text = ((int)Hp).ToString() + "/" + ((int)MaxHp).ToString();
             info.transform.SetParent(GameObject.Find("Canvas").transform);
             Vector2 objPosition = new Vector2(transform.position.x, transform.position.y - transform.GetComponent<Renderer>().bounds.size.y / 2 + 0.75f);
-            Vector2 cameraPosition = Camera.main.WorldToScreenPoint(objPosition);
-            info.GetComponent<RectTransform>().anchoredPosition = new Vector2(cameraPosition.x, cameraPosition.y - 150f);
+            Vector2 objOnCanvasPosition = Camera.main.WorldToScreenPoint(objPosition);
+            info.GetComponent<RectTransform>().anchoredPosition = new Vector2(objOnCanvasPosition.x, objOnCanvasPosition.y - 150f);
         }
 
         public void OnDrop(PointerEventData data)
@@ -86,24 +86,6 @@ namespace BattleNew
         }
 
         #region Buff檢查
-
-        // 攻擊前檢查
-        public override void BuffCheckBeforeAttack()
-        {
-            base.BuffCheckBeforeAttack();
-            foreach (var buff in BuffManager.Buffs)
-            {
-                switch (buff.Type[0])
-                {
-                    case BuffType.Ignite:
-                        print($"{Name} 受到了 {buff.Value * buff.Stack} 點 燃燒傷害!");
-                        break;
-                    case BuffType.Forzen:
-                        print($"{Name} 受到了 {buff.Value * buff.Stack} 點 寒冷傷害!");
-                        break;
-                }
-            }
-        }
 
         #endregion
 

@@ -26,6 +26,7 @@ namespace BattleNew
 
         bool bossExist;
         bool initialized = false;
+        bool isEnd = false;
 
 
         void Update()
@@ -33,7 +34,7 @@ namespace BattleNew
             Select();
         }
 
-        // 初始化
+        // 初始化 瞄準點的Active被設置為false了 如果要用到記得改掉
         private void Initialize()
         {
             if (initialized) return;
@@ -48,6 +49,7 @@ namespace BattleNew
             player = playerObj.GetComponent<Player>();
 
             aim = ABManager.Instance.LoadRes<GameObject>("battlenew", "aim");
+            aim.SetActive(false);
             aim.transform.SetParent(transform);
         }
 
@@ -55,6 +57,7 @@ namespace BattleNew
         public void BattleStart(BattleType type, params EnemyType[] enemyTypes)
         {
             if (!initialized) Initialize();
+            isEnd = false;
 
             gameObject.SetActive(true);
             ui.BattleStart();
@@ -77,14 +80,17 @@ namespace BattleNew
         // 戰鬥結束
         public void BattleEnd(bool winLose)
         {
+            isEnd = true;
             for (int i = 0; i < enemies.Length; i++) if (enemies[i] != null) Destroy(enemies[i]);
             ui.BattleEnd();
+
             if (winLose)
             {
                 PlayerUI.Instance.gameObject.SetActive(true);
                 MapManager.Instance.gameObject.SetActive(true);
                 DataManager.Instance.SetPlayerHp((int)player.GetComponent<Player>().Hp);
             }
+
             gameObject.SetActive(false);
         }
 
@@ -139,7 +145,6 @@ namespace BattleNew
             {
                 Renderer er = enemies[i].GetComponent<Renderer>();
                 enemies[i].transform.position = new Vector2(er.bounds.size.x / 2 + offset, er.bounds.size.y / 2 - downOffset);
-                enemies[i].GetComponent<Enemy>().ShowData();
                 offset += er.bounds.size.x + spacing;
             }
 
@@ -160,9 +165,10 @@ namespace BattleNew
             }
         }
 
-        // 選擇瞄準
+        // 選擇瞄準 這裡被return了 不會有任何效果 如果之後要用記得弄掉
         private void Select()
         {
+            return;
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 if (selectedIndex > 0)
@@ -191,9 +197,10 @@ namespace BattleNew
             }
         }
 
-        // 瞄準敵人
+        // 瞄準敵人 這裡被return了 不會有任何效果 如果之後要用記得弄掉
         private void Aim()
         {
+            return;
             if (selectedIndex >= enemies.Length) return;
             aim.transform.position = enemies[selectedIndex].transform.position + new Vector3(0, enemies[selectedIndex].GetComponent<Renderer>().bounds.size.y / 2 + 0.5f, 0);
         }
@@ -218,20 +225,6 @@ namespace BattleNew
             }
             else isEmpty = false;
             if (isEmpty) BattleEnd(true);
-        }
-
-        // 角色攻擊 *無用代碼
-        public void PlayerAttack(string arrange)
-        {
-            /*// 根據組合使用記錄下的攻擊
-            List<GameObject> tempEnemies = new List<GameObject>();
-            foreach (var enemy in enemies)
-            {
-                if (enemy == null || enemy.activeSelf == false) continue;
-                tempEnemies.Add(enemy);
-            }
-            // player.UseSkill(arrange, enemies[selectedIndex].GetComponent<Enemy>(), tempEnemies);
-            EnemyCheck();*/
         }
 
         // 取得所有存活敵人資訊
@@ -289,6 +282,7 @@ namespace BattleNew
         // 敵人回合
         public void EnemyTurn()
         {
+            if (isEnd) return;
             for (int i = 0; i < enemies.Length; i++)
             {
                 if (enemies[i] == null || enemies[i].GetComponent<Enemy>().IsDead) continue;
@@ -306,7 +300,14 @@ namespace BattleNew
         // 我方回合開始
         public void StartTurn()
         {
+            if (isEnd) return;
             player.StartTurn();
+        }
+
+        // 治癒角色
+        public void HealPlayer(float value)
+        {
+            player.GetComponent<Player>().Heal(value);
         }
 
         #region 尋找敵人

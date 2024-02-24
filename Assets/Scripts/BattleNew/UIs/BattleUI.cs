@@ -1,7 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Pool;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 namespace BattleNew
 {
@@ -11,18 +15,51 @@ namespace BattleNew
         [SerializeField] BattleManager battleManager;
         [SerializeField] Text skillName;
         [SerializeField] Text skillDescription;
-        [SerializeField] Text fadeOutText;
+        ObjectPool<FadeOutText> fadeTexts;
+        List<FadeOutText> textTemps = new List<FadeOutText>();
 
-        [SerializeField] float fadeTime = 1f;
-        IEnumerator fading;
+        bool initialized = false;
+
+        public virtual void Init()
+        {
+            initialized = true;
+            fadeTexts = new ObjectPool<FadeOutText>(
+                () =>
+                {
+                    var fadeText = ABManager.Instance.LoadRes<GameObject>("art", "FadeOutText");
+                    fadeText.transform.SetParent(transform);
+                    return fadeText.GetComponent<FadeOutText>();
+                },
+                (fadeText) =>
+                {
+                    fadeText.gameObject.SetActive(true);
+                },
+                (fadeText) =>
+                {
+                    fadeText.gameObject.SetActive(false);
+                },
+                (fadeText) =>
+                {
+                    Destroy(fadeText.gameObject);
+                }, true, 50, 200
+            );
+        }
 
         // 戰鬥開始
-        public virtual void BattleStart() { }
+        public virtual void BattleStart()
+        {
+            if (!initialized) Init();
+            textTemps.Clear();
+        }
 
         // 戰鬥結束
         public virtual void BattleEnd()
         {
-            fadeOutText.text = "";
+            // 重置尚未結束FadeOut進程的FadeOutText
+            for (int i = 0; i < textTemps.Count; i++)
+            {
+                fadeTexts.Release(textTemps[i]);
+            }
         }
 
         // 結束回合
@@ -60,26 +97,35 @@ namespace BattleNew
         }
 
         // 使用技能提示字
-        public void FadeOut(string skillName)
+        // 有使用到Camera.main.WorldToScreenPoint給的座標的情況下 要設anchorChange為true位置才會正確
+        public void FadeOut(string text, Color color, Vector3 position, bool anchorChange, bool isBold)
         {
-            if (fading != null) StopCoroutine(fading);
-            fading = IEFadeOut(skillName);
-            if (gameObject.activeInHierarchy) StartCoroutine(fading);
-        }
-
-        private IEnumerator IEFadeOut(string skillName)
-        {
-            float elapsedTime = 0f;
-            Color tColor = fadeOutText.color;
-            fadeOutText.text = skillName;
-
-            while (elapsedTime < fadeTime)
+            var fadeText = fadeTexts.Get();
+            textTemps.Add(fadeText);
+            if (anchorChange)
             {
-                elapsedTime += Time.deltaTime;
-                float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeTime);
-                fadeOutText.color = new Color(tColor.r, tColor.g, tColor.b, alpha);
-                yield return null;
+                fadeText.transform.SetParent(GameObject.Find("Canvas").transform);
+                RectTransform textRect = fadeText.GetComponent<RectTransform>();
+                textRect.anchorMin = new Vector2(0f, 0f);
+                textRect.anchorMax = new Vector2(0f, 0f);
+                textRect.anchoredPosition = new Vector2(position.x, position.y + 100f);
             }
+            else
+            {
+                fadeText.transform.SetParent(transform);
+                RectTransform textRect = fadeText.GetComponent<RectTransform>();
+                textRect.anchorMin = new Vector2(0.5f, 0.5f);
+                textRect.anchorMax = new Vector2(0.5f, 0.5f);
+                fadeText.transform.localPosition = position;
+            }
+            fadeText.FadeOut(text, color, isBold, (over) =>
+            {
+                if (over)
+                {
+                    fadeTexts.Release(fadeText);
+                    textTemps.Remove(fadeText);
+                }
+            });
         }
     }
 }

@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 141927153
+CRC: 3862775109
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -10,16 +10,21 @@ AssetBundleManifest:
       Dependencies: {}
     Info_2:
       Name: map
-      Dependencies: {}
+      Dependencies:
+        Dependency_0: art
     Info_3:
       Name: playerui
       Dependencies: {}
     Info_4:
       Name: skilltree
-      Dependencies: {}
+      Dependencies:
+        Dependency_0: art
     Info_5:
       Name: shop
       Dependencies: {}
     Info_6:
       Name: battlenew
+      Dependencies: {}
+    Info_7:
+      Name: art
       Dependencies: {}

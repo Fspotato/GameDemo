@@ -69,7 +69,7 @@ public class ExcelToJson
         }
 
         // 全部讀完後將資料轉成json格式並放進指定路徑中
-        string jsonPath = Application.dataPath + "/ArtRes/Config/config.json";
+        string jsonPath = Application.dataPath + "/ArtRes/Config/EntityConfig.json";
         string json = JsonUtility.ToJson(entityConfigs);
         File.WriteAllText(jsonPath, json);
         Debug.Log($"序列化完成, 已序列化{selectedAssets.Length}個文件, 已經文件存儲於預設地址");
@@ -83,11 +83,13 @@ public class ExcelToJson
         UnityEngine.Object[] selectedAssets = Selection.GetFiltered(typeof(UnityEngine.Object), SelectionMode.DeepAssets);
         if (selectedAssets.Length == 0) return;
 
-        // 用於放置所有實體資料
+        // 用於放置所有Buff資料
         SerializableDictionary<uint, Buff> buffConfigs = new SerializableDictionary<uint, Buff>();
 
         string assetPath;
         string[] temp;
+        List<BuffType> types;
+        Buff buff;
 
         foreach (UnityEngine.Object asset in selectedAssets)
         {
@@ -104,15 +106,13 @@ public class ExcelToJson
             // 讀出csv中所有資源
             string[] configs = File.ReadAllLines(assetPath);
 
-            Buff buff;
             string[] configValues; // 0:Id(uint) , 1:Types(List<BuffType>) , 2:Name(string) , 3: MaxStack(int)
-            List<BuffType> types = new List<BuffType>();
             // 將每行 BuffConfig 逐一放入 BuffConfigs中 從1開始讀 因為第0行是屬性行
             for (int i = 1; i < configs.Length; i++)
             {
                 configValues = configs[i].Replace("\"", "").Split(',');
                 if (configValues[0] == "") break;
-                types.Clear();
+                types = new List<BuffType>();
                 foreach (string type in configValues[1].Split('/'))
                 {
                     types.Add(Enum.Parse<BuffType>(type));

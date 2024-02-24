@@ -9,7 +9,6 @@ namespace BattleNew
     public class Sworder : Player
     {
         [SerializeField] List<GameObject> swordPrefabs = new List<GameObject>();
-        [SerializeField] List<SwordSoul> swordSoulsConfig = new List<SwordSoul>();
         public List<GameObject> swords = new List<GameObject>();
         public List<SwordSoul> swordSouls = new List<SwordSoul>();
 
@@ -29,7 +28,8 @@ namespace BattleNew
         {
             base.ItemCheck();
             swordSouls.Clear(); swords.Clear(); selectedSword = null;
-            if (DataManager.Instance.CheckItemExist("基礎劍胎")) swordSouls.Add(swordSoulsConfig.FirstOrDefault(ss => ss.Type == SwordType.BasicSword));
+            if (DataManager.Instance.CheckItemExist("基礎劍胎")) swordSouls.Add(new SwordSoul(SwordType.BasicSword, 1));
+            if (DataManager.Instance.CheckItemExist("血劍")) swordSouls.Add(new SwordSoul(SwordType.BloodSword, 2));
         }
 
         // 首回合特殊動作
@@ -59,22 +59,28 @@ namespace BattleNew
         {
             switch (type)
             {
-                case SwordType.BasicSword:
-                    for (int i = 0; i < 2; i++)
-                    {
-                        GameObject sword = Instantiate(swordPrefabs.FirstOrDefault(s => s.GetComponent<Sword>().Type == type), canvas.transform);
-                        sword.GetComponent<Sword>().Init();
-                        swords.Add(sword);
-                        SworderUI.Instance.GetComponent<SworderUI>().GetSwords(swords);
-                    }
-                    break;
+                case SwordType.BasicSword: SpawnSword(type, 2); break;
+                case SwordType.BloodSword: SpawnSword(type, 1); break;
             }
             SelectSword();
+        }
+
+        // 生成劍
+        private void SpawnSword(SwordType type, int times)
+        {
+            for (int i = 0; i < times; i++)
+            {
+                GameObject sword = Instantiate(swordPrefabs.FirstOrDefault(s => s.GetComponent<Sword>().Type == type), canvas.transform);
+                sword.GetComponent<Sword>().Init();
+                swords.Add(sword);
+                SworderUI.Instance.GetComponent<SworderUI>().GetSwords(swords);
+            }
         }
 
         // 技能組
         public override void UseSkill(uint id, Enemy enemy, List<GameObject> enemies)
         {
+            base.UseSkill(id, enemy, enemies);
             switch (id)
             {
                 case 30001:
@@ -85,7 +91,6 @@ namespace BattleNew
                 default:
                     break;
             }
-            SworderUI.Instance.FadeOut(SkillManager.Instance.GetSkillById(id).name);
         }
 
         // 選擇目前的劍 供外部調用
@@ -102,6 +107,7 @@ namespace BattleNew
             {
                 if (swords == null) continue;
                 selectedSword = swords[i].GetComponent<Sword>();
+                return;
             }
         }
     }

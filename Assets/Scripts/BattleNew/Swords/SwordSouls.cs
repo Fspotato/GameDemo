@@ -7,7 +7,7 @@ using UnityEngine.Events;
 namespace BattleNew
 {
     [System.Serializable]
-    public class SwordSoul : ScriptableObject
+    public class SwordSoul
     {
         [SerializeField] protected int round;
         [SerializeField] protected int maxRound;
@@ -27,11 +27,11 @@ namespace BattleNew
             }
         }
 
-        public SwordSoul DeepCopy()
+        public SwordSoul(SwordType type, int maxRound)
         {
+            this.type = type;
+            this.maxRound = maxRound;
             round = maxRound;
-            string json = JsonUtility.ToJson(this);
-            return JsonUtility.FromJson<SwordSoul>(json);
         }
     }
 

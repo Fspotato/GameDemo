@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace BattleNew
 {
@@ -10,9 +11,9 @@ namespace BattleNew
 
         public override void BattleEnd()
         {
-            base.BattleEnd();
             for (int i = 0; i < swords.Count; i++) Destroy(swords[i]);
             swords.Clear();
+            base.BattleEnd();
         }
 
         // 同步Sworder的劍丸池

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 491629738063110069}
   - component: {fileID: 2675094932467434330}
   m_Layer: 5
-  m_Name: MapLine
+  m_Name: LinkLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

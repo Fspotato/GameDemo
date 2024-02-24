@@ -47,16 +47,27 @@ public class Backpack : BaseManager<Backpack>
 
         item.selected.SetActive(true);
         itemNameText.text = DataManager.Instance.GetEntityNameById(item.ID);
-        itemDescriptionText.text = DataManager.Instance.GetEntityDescriptionByID(item.ID);
+        itemDescriptionText.text = DataManager.Instance.GetEntityDescriptionByID(item.ID).Replace("/n", "\n");
 
         selectedIndex = itemObjs.IndexOf(itemObjs.FirstOrDefault(i => i.Equals(item.gameObject)));
         currentItem = item;
     }
 
+    private void ShowItemClear()
+    {
+        itemNameText.text = "";
+        itemDescriptionText.text = "";
+    }
+
     // 展示道具 根據index重載
     private void ShowItem()
     {
-        if (selectedIndex > itemObjs.Count - 1) return;
+        if (selectedIndex > itemObjs.Count - 1) selectedIndex = 0;
+        if (selectedIndex > itemObjs.Count - 1)
+        {
+            ShowItemClear();
+            return;
+        }
         ShowItem(itemObjs[selectedIndex].GetComponent<BackpackItem>());
     }
 

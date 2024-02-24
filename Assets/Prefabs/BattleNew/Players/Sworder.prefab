@@ -100,11 +100,11 @@ MonoBehaviour:
   hp: 0
   maxHp: 0
   attack: 0
-  Buffs:
+  BuffManager:
     buffs: []
   swordPrefabs:
   - {fileID: 164452734746990323, guid: 724fe64d25e805d40a5eb9b13be398ee, type: 3}
-  swordSoulsConfig:
-  - {fileID: 11400000, guid: 82beb45327adceb41833ab6f997f48d1, type: 2}
+  - {fileID: 164452734746990323, guid: f1f576a0e481a794c8afc398c4f8d40f, type: 3}
   swords: []
   swordSouls: []
+  selectedSword: {fileID: 0}

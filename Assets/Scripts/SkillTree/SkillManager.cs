@@ -60,6 +60,7 @@ public class SkillManager : BaseManager<SkillManager>
             UseSkillPoint(skill.require);
             skillTree.unLockedSkills.Add(skill.id);
             skill.unLocked = true;
+            SkillCheck(skill.id);
             SkillTreeUI.Instance.ShowSkillBox(skill);
         }
         else
@@ -71,6 +72,7 @@ public class SkillManager : BaseManager<SkillManager>
     // 裝備技能
     public void EquipSkill(Skill skill)
     {
+        if (skill.type == SkillType.Passive) return;
         if (skillTree.equipedSkills.ContainsKey(skill.type))
         {
             if (skill.Equals(GetEquipedSkillByType(skill.type)))
@@ -159,18 +161,14 @@ public class SkillManager : BaseManager<SkillManager>
         return GetSkillById(skillTree.equipedSkills[type]);
     }
 
+    public void SkillCheck(uint id)
+    {
+        switch (id)
+        {
+            case 30002:
+                DataManager.Instance.GetEntity("血劍");
+                break;
+        }
+    }
 }
 
-public enum SkillType
-{
-    BasicSkill = 0,
-    SkillA = 1,
-    SkillB = 2,
-    Ultimate = 3,
-}
-
-public enum ClassType
-{
-    SwordMan = 0,
-    Sworder = 1,
-}

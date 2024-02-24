@@ -85,6 +85,7 @@ namespace BattleNew
     public enum SwordType
     {
         BasicSword = 0,
+        BloodSword = 1,
     }
 }
 

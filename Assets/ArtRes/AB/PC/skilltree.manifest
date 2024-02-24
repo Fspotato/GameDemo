@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3217945706
+CRC: 1876320445
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4e658871d3a89e547210b3949d9e1a7c
+    Hash: 9561bf72ef010dd7579900fc8bfb9876
   TypeTreeHash:
     serializedVersion: 2
     Hash: d2290b08254db733c5e88cd0fedffa94
@@ -79,4 +79,5 @@ SerializeReferenceClassIdentifiers:
 Assets:
 - Assets/Prefabs/SkillTree/SkillNode.prefab
 - Assets/Prefabs/SkillTree/SkillTree.prefab
-Dependencies: []
+Dependencies:
+- C:/UnityProjects/FinalDemo/Assets/ArtRes/AB/PC/art
