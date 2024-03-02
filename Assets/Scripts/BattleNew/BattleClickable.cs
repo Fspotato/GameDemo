@@ -21,7 +21,7 @@ namespace BattleNew
             switch (type)
             {
                 case BattleClickType.EndTurn:
-                    BattleUI.Instance.EndTurn();
+                    BattleManager.Instance.EnemyTurn();
                     break;
                 case BattleClickType:
                     BattleManager.Instance.SelectSkill(this);

@@ -25,13 +25,19 @@ public class DataManager : BaseManager<DataManager>
     }
 
     // 存檔功能
-    // 待完善 目前只補了背包
-    public void SaveData()
+    private void SaveData()
     {
         string json = JsonUtility.ToJson(backpack);
         File.WriteAllText(Application.persistentDataPath + "/backpack.json", json);
+
+    }
+
+    public void SaveAllData()
+    {
+        SaveData();
         SkillManager.Instance.SaveSkillTree();
         MapManager.Instance.SaveMap();
+        LevelManager.Instance.SaveInfo();
     }
 
     // 讀檔功能

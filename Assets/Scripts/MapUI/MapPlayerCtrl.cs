@@ -9,6 +9,8 @@ public class MapPlayerCtrl : MonoBehaviour
     public MapManager mapManager;
     public MapUI mapUI;
 
+    MapNode contentNode;
+
     void Awake()
     {
         Instance = this;
@@ -21,9 +23,9 @@ public class MapPlayerCtrl : MonoBehaviour
 
     public void SendPlayerToNode(MapNode node)
     {
-        mapManager.CurrentMap.path.Add(node.Node.point);
-        mapManager.SaveMap();
-        mapUI.SetAttainableNodes();
+        contentNode = node;
+
+        LevelManager.Instance.LevelChange(1);
 
         switch (node.Node.nodeType)
         {
@@ -44,6 +46,15 @@ public class MapPlayerCtrl : MonoBehaviour
             case NodeType.Shop: GoToEventNode(EventType.Shop); break;
             case NodeType.Building: print("Enter to Building Node!"); break;
         }
+
+    }
+
+    public void EnterNode()
+    {
+        if (mapManager.CurrentMap.path.Contains(contentNode.Node.point)) return;
+        mapManager.CurrentMap.path.Add(contentNode.Node.point);
+        mapManager.SaveMap();
+        mapUI.SetAttainableNodes();
     }
 
     void GoToEnemyNode(BattleType type)

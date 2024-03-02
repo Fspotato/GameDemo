@@ -31,7 +31,8 @@ namespace BattleNew
 
         void Update()
         {
-            Select();
+            SelectSkill();
+            InputHandle();
         }
 
         // 初始化 瞄準點的Active被設置為false了 如果要用到記得改掉
@@ -88,6 +89,7 @@ namespace BattleNew
             {
                 PlayerUI.Instance.gameObject.SetActive(true);
                 MapManager.Instance.gameObject.SetActive(true);
+                MapManager.Instance.EnterNode();
                 DataManager.Instance.SetPlayerHp((int)player.GetComponent<Player>().Hp);
             }
 
@@ -129,6 +131,7 @@ namespace BattleNew
                 }
 
                 enemies[i] = Instantiate(tempConfigs[cRnd].Enemies[eRnd], transform);
+                enemies[i].GetComponent<Enemy>().LevelCoefCheck();
             }
 
             // 交換Boss位置 如果Boss在第一位
@@ -268,6 +271,15 @@ namespace BattleNew
             }
         }
 
+        // 快捷鍵選擇技能
+        private void SelectSkill()
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                SelectSkill(ui.transform.Find("BasicSkillButton").GetComponent<BattleClickable>());
+            }
+        }
+
         // 使用技能
         public void UseSkill(SkillType type)
         {
@@ -308,6 +320,11 @@ namespace BattleNew
         public void HealPlayer(float value)
         {
             player.GetComponent<Player>().Heal(value);
+        }
+
+        private void InputHandle()
+        {
+            if (Input.GetKeyDown(KeyCode.D)) EnemyTurn();
         }
 
         #region 尋找敵人

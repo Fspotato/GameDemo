@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 namespace BattleNew
 {
@@ -19,6 +20,15 @@ namespace BattleNew
         public EnemyType Type => type;
 
         GameObject info;
+
+        // 關卡係數檢查
+        public virtual void LevelCoefCheck()
+        {
+            float coef = LevelManager.Instance.LevelInfo.TotalEnhanceCoef;
+            hp = Mathf.Round(hp * coef);
+            maxHp = Mathf.Round(maxHp * coef);
+            attack = Mathf.Round(attack * coef);
+        }
 
         // 受到傷害
         public override void TakeDamage(float value)

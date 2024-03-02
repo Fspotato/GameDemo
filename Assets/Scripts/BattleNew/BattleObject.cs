@@ -32,8 +32,9 @@ namespace BattleNew
             if (isDead) return;
             value = BuffCheckOnTakeDamage(value);
             value = Mathf.Max(1f, value);
-            BattleUI.Instance.FadeOut($"-{value}", Color.red, Camera.main.WorldToScreenPoint(transform.localPosition), true, true);
-            hp -= value;
+            BattleUI.Instance.FadeOut($"-{Mathf.Round(value)}", Color.red, Camera.main.WorldToScreenPoint(transform.localPosition), true, true);
+            hp -= Mathf.Round(value);
+            hp = Mathf.Round(hp);
             if (hp <= 0f)
             {
                 hp = 0f;

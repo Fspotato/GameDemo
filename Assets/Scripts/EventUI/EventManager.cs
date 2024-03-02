@@ -60,6 +60,7 @@ public class EventManager : BaseManager<EventManager>
     public void ExitEvent()
     {
         MapManager.Instance.gameObject.SetActive(true);
+        MapManager.Instance.EnterNode();
         PlayerUI.Instance.gameObject.SetActive(true);
         gameObject.SetActive(false);
     }

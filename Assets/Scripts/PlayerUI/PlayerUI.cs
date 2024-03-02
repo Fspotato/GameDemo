@@ -19,8 +19,7 @@ public class PlayerUI : BaseManager<PlayerUI>
     // 離開遊戲至主目錄
     public void ExitGame()
     {
-        DataManager.Instance.SaveData();
-        SkillManager.Instance.SaveSkillTree();
+        DataManager.Instance.SaveAllData();
         MapManager.Instance.gameObject.SetActive(false);
         Menu.Instance.gameObject.SetActive(true);
         options.SetActive(false);

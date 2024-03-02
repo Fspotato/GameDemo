@@ -83,6 +83,7 @@ public class ShopManager : BaseManager<ShopManager>
     {
         PlayerUI.Instance.gameObject.SetActive(true);
         MapManager.Instance.gameObject.SetActive(true);
+        MapManager.Instance.EnterNode();
         gameObject.SetActive(false);
     }
 

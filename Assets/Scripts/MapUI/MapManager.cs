@@ -47,4 +47,9 @@ public class MapManager : BaseManager<MapManager>
     {
         File.WriteAllText(Application.persistentDataPath + "/map.json", CurrentMap.ToJson());
     }
+
+    public void EnterNode()
+    {
+        GetComponent<MapPlayerCtrl>().EnterNode();
+    }
 }

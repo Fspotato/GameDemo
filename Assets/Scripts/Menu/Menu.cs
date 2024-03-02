@@ -52,6 +52,8 @@ public class Menu : BaseManager<Menu>
                 SkillTreeUI.Instance.ShowEquipedSkill();
                 // 獲得初始道具
                 DataManager.Instance.GetEntity("基礎劍胎");
+                // 關卡係數初始化
+                LevelManager.Instance.Init();
                 break;
         }
         MapManager.Instance.GenerateNewMap();
@@ -64,6 +66,7 @@ public class Menu : BaseManager<Menu>
         DataManager.Instance.LoadData();
         SkillManager.Instance.LoadSkillTree();
         MapManager.Instance.LoadMap();
+        LevelManager.Instance.LoadInfo();
         ToMainGame();
     }
 

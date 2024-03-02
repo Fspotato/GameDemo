@@ -21,6 +21,6 @@ public class BaseManager<T> : MonoBehaviour where T : MonoBehaviour
 
     void Awake()
     {
-        instance = gameObject.GetComponent<T>();
+        if (instance == null) instance = gameObject.GetComponent<T>();
     }
 }
