@@ -40,8 +40,8 @@ public class MapUI : MonoBehaviour
         if (!initialized)
         {
             initialized = true;
-            mapLinePrefab = ABManager.Instance.LoadRes<GameObject>("art", "LinkLine");
-            materialPrefab = ABManager.Instance.LoadRes<Material>("art", "LineMaterial");
+            mapLinePrefab = ABManager.Instance.ReadRes<GameObject>("art", "LinkLine");
+            materialPrefab = ABManager.Instance.ReadRes<Material>("art", "LineMaterial");
         }
 
         ClearMap();

@@ -20,11 +20,16 @@ namespace BattleNew
         }
 
         // 獲得Buff(id參照BuffConfig表, value, round 必填, stack, maxStack不填則自動視為1層及不變)
-        public void GetBuff(uint id, float value, int round, int stack = -1, int maxStack = -1)
+        public void GetBuff(uint id, float value, int round, int stack, int maxStack, Vector3 position)
         {
             Buff buff = buffs.FirstOrDefault(b => b.Id == id);
-            if (buff == default) buffs.Add(new Buff(id, value, round, stack, maxStack));
+            if (buff == default)
+            {
+                buff = new Buff(id, value, round, stack, maxStack);
+                buffs.Add(buff);
+            }
             else buff.GetBuff(value, round, stack, maxStack);
+            BattleUI.Instance.FadeOut(buff.Name, Color.white, position, true, false);
         }
 
         // 移除指定種類Buff 可以一次指定多種

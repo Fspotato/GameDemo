@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class FadeOutText : MonoBehaviour
 {
-    [SerializeField] Text fadeText;
+    [SerializeField] public Text fadeText;
     [SerializeField] float fadeTime = 1f;
     IEnumerator fading;
 

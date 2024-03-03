@@ -80,7 +80,6 @@ namespace BattleNew
         // 技能組
         public override void UseSkill(uint id, Enemy enemy, List<GameObject> enemies)
         {
-            base.UseSkill(id, enemy, enemies);
             switch (id)
             {
                 case 30001:
@@ -91,6 +90,7 @@ namespace BattleNew
                 default:
                     break;
             }
+            if (gameObject.activeInHierarchy) base.UseSkill(id, enemy, enemies);
         }
 
         // 選擇目前的劍 供外部調用

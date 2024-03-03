@@ -32,13 +32,14 @@ namespace BattleNew
             if (isDead) return;
             value = BuffCheckOnTakeDamage(value);
             value = Mathf.Max(1f, value);
-            BattleUI.Instance.FadeOut($"-{Mathf.Round(value)}", Color.red, Camera.main.WorldToScreenPoint(transform.localPosition), true, true);
             hp -= Mathf.Round(value);
             hp = Mathf.Round(hp);
+            BattleUI.Instance.FadeOut($"-{Mathf.Round(value)}", Color.red, Camera.main.WorldToScreenPoint(transform.localPosition) + new Vector3(0f, 100f, 0f), true, true);
             if (hp <= 0f)
             {
                 hp = 0f;
                 Die();
+                return;
             }
         }
 
@@ -46,8 +47,14 @@ namespace BattleNew
         public virtual void Heal(float value)
         {
             if (isDead) return;
-            hp += value;
-            hp = Mathf.Min(hp, maxHp);
+            BattleUI.Instance.FadeOut($"+{Mathf.Round(value)}", Color.green, Camera.main.WorldToScreenPoint(transform.localPosition) + new Vector3(0f, 100f, 0f), true, true);
+            hp += Mathf.Round(value);
+            hp = Mathf.Min(Mathf.Round(hp), maxHp);
+        }
+
+        public virtual void GetBuff(uint id, float value, int round, int stack = -1, int maxStack = -1)
+        {
+            BuffManager.GetBuff(id, value, round, stack, maxStack, Camera.main.WorldToScreenPoint(transform.position));
         }
 
         #region Buff檢查

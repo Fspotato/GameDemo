@@ -36,6 +36,7 @@ namespace BattleNew
                 },
                 (fadeText) =>
                 {
+                    fadeText.fadeText.text = "";
                     fadeText.gameObject.SetActive(false);
                 },
                 (fadeText) =>
@@ -58,6 +59,7 @@ namespace BattleNew
             // 重置尚未結束FadeOut進程的FadeOutText
             for (int i = 0; i < textTemps.Count; i++)
             {
+                if (textTemps[i] == null) continue;
                 fadeTexts.Release(textTemps[i]);
             }
         }
@@ -104,15 +106,13 @@ namespace BattleNew
             textTemps.Add(fadeText);
             if (anchorChange)
             {
-                fadeText.transform.SetParent(GameObject.Find("Canvas").transform);
                 RectTransform textRect = fadeText.GetComponent<RectTransform>();
                 textRect.anchorMin = new Vector2(0f, 0f);
                 textRect.anchorMax = new Vector2(0f, 0f);
-                textRect.anchoredPosition = new Vector2(position.x, position.y + 100f);
+                textRect.anchoredPosition = new Vector2(position.x, position.y);
             }
             else
             {
-                fadeText.transform.SetParent(transform);
                 RectTransform textRect = fadeText.GetComponent<RectTransform>();
                 textRect.anchorMin = new Vector2(0.5f, 0.5f);
                 textRect.anchorMax = new Vector2(0.5f, 0.5f);
@@ -122,8 +122,8 @@ namespace BattleNew
             {
                 if (over)
                 {
-                    fadeTexts.Release(fadeText);
                     textTemps.Remove(fadeText);
+                    fadeTexts.Release(fadeText);
                 }
             });
         }

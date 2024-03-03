@@ -36,8 +36,8 @@ public class SkillTreeUI : BaseManager<SkillTreeUI>
         if (!initialized)
         {
             initialized = true;
-            linePrefab = ABManager.Instance.LoadRes<GameObject>("art", "LinkLine");
-            lineMaterialPrefab = ABManager.Instance.LoadRes<Material>("art", "LineMaterial");
+            linePrefab = ABManager.Instance.ReadRes<GameObject>("art", "LinkLine");
+            lineMaterialPrefab = ABManager.Instance.ReadRes<Material>("art", "LineMaterial");
         }
 
         ClearTree();

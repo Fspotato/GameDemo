@@ -58,6 +58,14 @@ public class ABManager : BaseManager<ABManager>
         else return obj;
     }
 
+    // 只返還值不實例化的同步加載
+    public T ReadRes<T>(string abName, string resName) where T : Object
+    {
+        LoadAB(abName);
+        T obj = abDic[abName].LoadAsset<T>(resName);
+        return obj;
+    }
+
     // 異步加載
     public void LoadResAsync(string abName, string resName, UnityAction<Object> callBack)
     {

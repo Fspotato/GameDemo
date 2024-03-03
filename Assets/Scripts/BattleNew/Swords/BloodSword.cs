@@ -10,7 +10,7 @@ namespace BattleNew
         public override void Effect(Enemy enemy)
         {
             enemy.TakeDamage(5);
-            enemy.BuffManager.GetBuff(50001, 10, 2);
+            enemy.GetBuff(50001, 10, 2);
             SworderUI.Instance.GetComponent<SworderUI>().RemoveSword(this);
         }
 

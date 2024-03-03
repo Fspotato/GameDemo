@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 
 namespace BattleNew
@@ -85,15 +86,19 @@ namespace BattleNew
             for (int i = 0; i < enemies.Length; i++) if (enemies[i] != null) Destroy(enemies[i]);
             ui.BattleEnd();
 
-            if (winLose)
+            if (isEnd)
             {
-                PlayerUI.Instance.gameObject.SetActive(true);
-                MapManager.Instance.gameObject.SetActive(true);
-                MapManager.Instance.EnterNode();
-                DataManager.Instance.SetPlayerHp((int)player.GetComponent<Player>().Hp);
+                if (winLose)
+                {
+                    PlayerUI.Instance.gameObject.SetActive(true);
+                    MapManager.Instance.gameObject.SetActive(true);
+                    MapManager.Instance.EnterNode();
+                    DataManager.Instance.SetPlayerHp((int)player.GetComponent<Player>().Hp);
+                }
+
+                gameObject.SetActive(false);
             }
 
-            gameObject.SetActive(false);
         }
 
         // 按條件抽選隨機設定檔
