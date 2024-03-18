@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using UnityEngine;
 
 namespace BattleNew
@@ -11,6 +10,7 @@ namespace BattleNew
         [SerializeField] GameObject[] enemies = new GameObject[4];
         [SerializeField] List<EnemyConfig> configs = new List<EnemyConfig>();
         [SerializeField] BattleUI ui;
+        [SerializeField] BattleResult result;
 
         GameObject playerObj;
         GameObject aim;
@@ -20,15 +20,20 @@ namespace BattleNew
         EnemyType[] enemyTypes;
 
         int selectedIndex = 0;
+        #region 技能按鈕
         BattleClickable selectedSkill;
+        [SerializeField] BattleClickable basicButton;
+        [SerializeField] BattleClickable skillAButton;
+        [SerializeField] BattleClickable skillBButton;
+        [SerializeField] BattleClickable UlimateButton;
+        #endregion
 
-        readonly float downOffset = 0.5f; // 角色和怪物物件位置向下偏移值
-        readonly float spacing = 0.5f; // 怪物物件位置之間的間距
+        const float downOffset = 0.5f; // 角色和怪物物件位置向下偏移值
+        const float spacing = 0.5f; // 怪物物件位置之間的間距
 
         bool bossExist;
         bool initialized = false;
         bool isEnd = false;
-
 
         void Update()
         {
@@ -79,26 +84,31 @@ namespace BattleNew
             selectedSkill = null;
         }
 
-        // 戰鬥結束
-        public void BattleEnd(bool winLose)
+        // 清場及戰鬥結算
+        private void BattleReslove(bool winLose)
         {
             isEnd = true;
             for (int i = 0; i < enemies.Length; i++) if (enemies[i] != null) Destroy(enemies[i]);
-            ui.BattleEnd();
+            ui.BattleReslove();
 
             if (isEnd)
             {
                 if (winLose)
                 {
-                    PlayerUI.Instance.gameObject.SetActive(true);
-                    MapManager.Instance.gameObject.SetActive(true);
                     MapManager.Instance.EnterNode();
                     DataManager.Instance.SetPlayerHp((int)player.GetComponent<Player>().Hp);
+                    result.ShowResult((int)player.GetComponent<Player>().Hp, type);
                 }
-
-                gameObject.SetActive(false);
             }
+        }
 
+        // 離開戰鬥畫面
+        public void ExitBattle()
+        {
+            MapManager.Instance.gameObject.SetActive(true);
+            PlayerUI.Instance.gameObject.SetActive(true);
+            result.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
 
         // 按條件抽選隨機設定檔
@@ -232,7 +242,7 @@ namespace BattleNew
                 }
             }
             else isEmpty = false;
-            if (isEmpty) BattleEnd(true);
+            if (isEmpty) BattleReslove(true);
         }
 
         // 取得所有存活敵人資訊
@@ -281,7 +291,7 @@ namespace BattleNew
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                SelectSkill(ui.transform.Find("BasicSkillButton").GetComponent<BattleClickable>());
+                SelectSkill(basicButton);
             }
         }
 
@@ -309,7 +319,7 @@ namespace BattleNew
                 print($"角色剩餘血量{player.Hp}點");
             }
 
-            if (player.IsDead) BattleEnd(false);
+            if (player.IsDead) BattleReslove(false);
 
             StartTurn();
         }
@@ -327,6 +337,7 @@ namespace BattleNew
             player.GetComponent<Player>().Heal(value);
         }
 
+        // 輸入控制
         private void InputHandle()
         {
             if (Input.GetKeyDown(KeyCode.D)) EnemyTurn();

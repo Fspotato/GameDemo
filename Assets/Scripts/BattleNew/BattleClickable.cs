@@ -23,6 +23,9 @@ namespace BattleNew
                 case BattleClickType.EndTurn:
                     BattleManager.Instance.EnemyTurn();
                     break;
+                case BattleClickType.Exit:
+                    BattleManager.Instance.ExitBattle();
+                    break;
                 case BattleClickType:
                     BattleManager.Instance.SelectSkill(this);
                     break;
@@ -37,5 +40,6 @@ namespace BattleNew
         SkillA = 2,
         SkillB = 3,
         Ultimate = 4,
+        Exit = 99,
     }
 }

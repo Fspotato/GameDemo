@@ -13,6 +13,8 @@ public class MapManager : BaseManager<MapManager>
 
     [SerializeField] public Map CurrentMap;
 
+    [SerializeField] MapPlayerCtrl ctrl;
+
     public void LoadMap()
     {
         if (File.Exists(Application.persistentDataPath + "/map.json"))
@@ -50,6 +52,6 @@ public class MapManager : BaseManager<MapManager>
 
     public void EnterNode()
     {
-        GetComponent<MapPlayerCtrl>().EnterNode();
+        ctrl.EnterNode();
     }
 }

@@ -50,11 +50,12 @@ namespace BattleNew
         public virtual void BattleStart()
         {
             if (!initialized) Init();
+            gameObject.SetActive(true);
             textTemps.Clear();
         }
 
         // 戰鬥結束
-        public virtual void BattleEnd()
+        public virtual void BattleReslove()
         {
             // 重置尚未結束FadeOut進程的FadeOutText
             for (int i = 0; i < textTemps.Count; i++)
@@ -62,6 +63,7 @@ namespace BattleNew
                 if (textTemps[i] == null) continue;
                 fadeTexts.Release(textTemps[i]);
             }
+            gameObject.SetActive(false);
         }
 
         // 結束回合
